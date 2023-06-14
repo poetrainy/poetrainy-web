@@ -14,14 +14,14 @@ import { LinksHeadlineType, LinksType } from '@/types/link';
 
 const animationKeyframes = keyframes`
   0% { transform: translateY(0); }
-  15% { transform: translateY(4px); }
-  30% { transform: translateY(0px); }
-  45% { transform: translateY(4px); }
-  60% { transform: translateY(0); }
+  10% { transform: translateY(4px); }
+  20% { transform: translateY(0px); }
+  30% { transform: translateY(4px); }
+  40% { transform: translateY(0); }
   100% { transform: translateY(0); }
 `;
 
-const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+const animation = `${animationKeyframes} 2.5s ease-in-out infinite`;
 
 const Home: NextPage = () => {
   const Links: FC<{
