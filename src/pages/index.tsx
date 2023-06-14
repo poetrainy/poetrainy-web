@@ -12,6 +12,8 @@ import { LINK, LINK_PHOTO, LINK_WEB } from '@/constants/link';
 import { TitleListType } from '@/types/common';
 import { LinksHeadlineType, LinksType } from '@/types/link';
 
+import { useWindowSize } from '@/hooks/useJudgeSP';
+
 const animationKeyframes = keyframes`
   0% { transform: translateY(0); }
   10% { transform: translateY(4px); }
@@ -24,6 +26,8 @@ const animationKeyframes = keyframes`
 const animation = `${animationKeyframes} 2.5s ease-in-out infinite`;
 
 const Home: NextPage = () => {
+  const { isSP } = useWindowSize();
+
   const Links: FC<{
     contents: LinksType[LinksHeadlineType];
   }> = ({ contents }) => {
@@ -65,9 +69,9 @@ const Home: NextPage = () => {
   const Name = () => (
     <Text
       as={'h1'}
-      fontSize={'4rem'}
+      fontSize={'5rem'}
       fontFamily={'heading'}
-      lineHeight={'5rem'}
+      lineHeight={'6rem'}
     >
       {NAME}
     </Text>
@@ -84,6 +88,7 @@ const Home: NextPage = () => {
             p={'2px 4px 0 4px'}
             fontSize={'1.5rem'}
             fontFamily={'sp'}
+            fontWeight={'bold'}
             letterSpacing={'-0.3px'}
           >
             {item.title}
@@ -99,8 +104,10 @@ const Home: NextPage = () => {
   );
 
   const Copy = () => (
-    <Box as={'footer'} mt={'40px'}>
-      <Text as={'small'}>&copy; {NAME}</Text>
+    <Box as={'footer'} mt={'32px'}>
+      <Text as={'small'} fontFamily={'sp'} fontSize={'1.6rem'}>
+        &copy; 2023 {NAME}
+      </Text>
     </Box>
   );
 
@@ -112,9 +119,16 @@ const Home: NextPage = () => {
       p={'12px 40px'}
       borderRadius={'9999px'}
       lineHeight={'2rem'}
-      pos={'relative'}
       mb={'16px'}
       sx={{
+        ...(isSP
+          ? {
+              pos: 'relative',
+            }
+          : {
+              pos: 'absolute',
+              inset: '-96px auto auto auto',
+            }),
         '&::after': {
           content: '""',
           display: 'block',
@@ -134,18 +148,42 @@ const Home: NextPage = () => {
   );
 
   return (
-    <Center minH={'95vh'} p={'64px 0'}>
-      <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
-        <Blob />
-        <Links contents={LINK[LINK_WEB]} />
-        <Icon />
-        <Links contents={LINK[LINK_PHOTO]} />
-        <Flex flexDir={'column'} alignItems={'center'} gap={'12px'}>
-          <Name />
-          <Description />
-        </Flex>
-      </Center>
-    </Center>
+    <>
+      {isSP ? (
+        <Center minH={'95vh'} p={'56px 0 80px'}>
+          <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
+            <Blob />
+            <Links contents={LINK[LINK_WEB]} />
+            <Icon />
+            <Links contents={LINK[LINK_PHOTO]} />
+            <Flex flexDir={'column'} alignItems={'center'} gap={'12px'}>
+              <Name />
+              <Description />
+            </Flex>
+          </Center>
+        </Center>
+      ) : (
+        <Center flexDir={'column'} minH={'100vh'}>
+          <Center alignItems={'center'} gap={'32px'} w={'fit-content'}>
+            <Box pos={'relative'}>
+              <Blob />
+              <Icon />
+            </Box>
+            <Flex flexDir={'column'} gap={'32px'}>
+              <Box>
+                <Description />
+                <Name />
+              </Box>
+              <Flex gap={'20px'}>
+                <Links contents={LINK[LINK_WEB]} />
+                <Links contents={LINK[LINK_PHOTO]} />
+              </Flex>
+            </Flex>
+          </Center>
+          <Copy />
+        </Center>
+      )}
+    </>
   );
 };
 
