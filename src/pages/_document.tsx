@@ -7,7 +7,7 @@ export default class Document extends NextDocument {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=EB+Garamond&family=League+Spartan:wght@600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=EB+Garamond&family=League+Spartan:wght@300;600&display=swap"
             rel="stylesheet"
           />
           <link rel="manifest" href="/manifest.json" />
