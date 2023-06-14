@@ -20,4 +20,4 @@ export const TITLE_LIST: TitleListType[] = [
 
 export const SITE_DESCRIPTION: string = `${TITLE_WEB} / ${TITLE_PHOTO}`;
 export const SITE_TITLE_FULL: string = `${NAME} - ${SITE_DESCRIPTION}`;
-export const SITE_URL: string = 'https://portrainy.vercel.app/';
+export const SITE_URL: string = 'https://poetrainy.vercel.app/';
