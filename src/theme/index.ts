@@ -27,10 +27,10 @@ const styles = {
       },
     },
     '::selection': {
-      background: 'tomato',
+      background: 'rgba(8, 103, 118, 0.2)',
     },
     '::-moz-selection': {
-      background: 'tomato',
+      background: 'rgba(8, 103, 118, 0.2)',
     },
   },
 };

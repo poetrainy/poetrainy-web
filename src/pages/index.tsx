@@ -1,12 +1,20 @@
 import { FC } from 'react';
 import { NextPage } from 'next';
 import { motion } from 'framer-motion';
-import { Box, Center, Flex, Text, keyframes } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Flex,
+  Text,
+  keyframes,
+  useColorModeValue,
+  useColorMode,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 import Icon from '@/components/Icon';
 
-import { NAME, TITLE_LIST } from '@/constants/common';
+import { COLOR_BLACK, NAME, TITLE_LIST } from '@/constants/common';
 import { LINK, LINK_PHOTO, LINK_WEB } from '@/constants/link';
 
 import { TitleListType } from '@/types/common';
@@ -27,6 +35,10 @@ const animation = `${animationKeyframes} 2.5s ease-in-out infinite`;
 
 const Home: NextPage = () => {
   const { isSP } = useWindowSize();
+  const { toggleColorMode } = useColorMode();
+
+  const bg = useColorModeValue('#FFFFFF', COLOR_BLACK);
+  const color = useColorModeValue(COLOR_BLACK, '#FFFFFF');
 
   const Links: FC<{
     contents: LinksType[LinksHeadlineType];
@@ -141,7 +153,7 @@ const Home: NextPage = () => {
         },
       }}
     >
-      写真を撮ることが大好きな
+      写真を撮ることが好きな
       <br />
       新米Webエンジニアです。
     </Center>
