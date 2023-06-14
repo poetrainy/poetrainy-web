@@ -1,6 +1,6 @@
 import { TitleListType } from '@/types/common';
 
-export const NAME: string = '@poetrainy';
+export const NAME: string = 'poetrainy';
 
 export const COLOR_GREEN: string = '#086776';
 export const COLOR_BLACK: string = '#383838';

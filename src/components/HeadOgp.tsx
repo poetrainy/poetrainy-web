@@ -11,7 +11,7 @@ const HeadOgp: FC = () => {
       <meta property={'og:url'} content={SITE_URL} />
       <meta
         property={'og:description'}
-        content={'写真が好きなフロントエンドエンジニアです。'}
+        content={'写真を撮ることが好きな新米Webエンジニアです。'}
       />
       {/* ページの種類 */}
       <meta property={'og:type'} content={'website'} />
