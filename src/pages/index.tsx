@@ -162,7 +162,7 @@ const Home: NextPage = () => {
   return (
     <>
       {isSP ? (
-        <Center minH={'95vh'} p={'56px 0 80px'}>
+        <Center minH={'95vh'} p={'56px 0 64px'}>
           <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
             <Blob />
             <Links contents={LINK[LINK_WEB]} />
@@ -175,7 +175,7 @@ const Home: NextPage = () => {
           </Center>
         </Center>
       ) : (
-        <Center flexDir={'column'} minH={'100vh'}>
+        <Center flexDir={'column'} minH={'100vh'} pt={'48px'}>
           <Center alignItems={'center'} gap={'32px'} w={'fit-content'}>
             <Box pos={'relative'}>
               <Blob />
