@@ -1,20 +1,12 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { NextPage } from 'next';
 import { motion } from 'framer-motion';
-import {
-  Box,
-  Center,
-  Flex,
-  Text,
-  keyframes,
-  useColorModeValue,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Box, Center, Flex, Text, keyframes } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 import Icon from '@/components/Icon';
 
-import { COLOR_BLACK, NAME, TITLE_LIST } from '@/constants/common';
+import { NAME, TITLE_LIST } from '@/constants/common';
 import { LINK, LINK_PHOTO, LINK_WEB } from '@/constants/link';
 
 import { TitleListType } from '@/types/common';
@@ -35,10 +27,7 @@ const animation = `${animationKeyframes} 2.5s ease-in-out infinite`;
 
 const Home: NextPage = () => {
   const { isSP } = useWindowSize();
-  const { toggleColorMode } = useColorMode();
-
-  const bg = useColorModeValue('#FFFFFF', COLOR_BLACK);
-  const color = useColorModeValue(COLOR_BLACK, '#FFFFFF');
+  const [isView, setIsView] = useState<boolean>(true);
 
   const Links: FC<{
     contents: LinksType[LinksHeadlineType];
@@ -116,7 +105,7 @@ const Home: NextPage = () => {
   );
 
   const Copy = () => (
-    <Box as={'footer'} mt={'32px'}>
+    <Box as={'footer'} mt={'24px'}>
       <Text as={'small'} fontFamily={'sp'} fontSize={'1.6rem'}>
         &copy; 2023 {NAME}
       </Text>
@@ -132,6 +121,7 @@ const Home: NextPage = () => {
       borderRadius={'9999px'}
       lineHeight={'2rem'}
       mb={'16px'}
+      textAlign={'center'}
       sx={{
         ...(isSP
           ? {
@@ -155,45 +145,55 @@ const Home: NextPage = () => {
     >
       写真を撮ることが好きな
       <br />
-      新米Webエンジニアです。
+      新米Webエンジニアです｡
     </Center>
   );
 
   return (
     <>
-      {isSP ? (
-        <Center minH={'95vh'} p={'56px 0 64px'}>
-          <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
-            <Blob />
-            <Links contents={LINK[LINK_WEB]} />
-            <Icon />
-            <Links contents={LINK[LINK_PHOTO]} />
-            <Flex flexDir={'column'} alignItems={'center'} gap={'12px'}>
-              <Name />
-              <Description />
-            </Flex>
-          </Center>
-        </Center>
-      ) : (
-        <Center flexDir={'column'} minH={'100vh'} pt={'48px'}>
-          <Center alignItems={'center'} gap={'32px'} w={'fit-content'}>
-            <Box pos={'relative'}>
-              <Blob />
-              <Icon />
-            </Box>
-            <Flex flexDir={'column'} gap={'32px'}>
-              <Box>
-                <Description />
-                <Name />
-              </Box>
-              <Flex gap={'20px'}>
+      {isView && (
+        <>
+          {isSP ? (
+            <Center minH={'95vh'} p={'56px 0 64px'}>
+              <Center
+                flexDir={'column'}
+                gap={'12px'}
+                w={'fit-content'}
+                m={'auto'}
+              >
+                <Blob />
                 <Links contents={LINK[LINK_WEB]} />
+                <Icon />
                 <Links contents={LINK[LINK_PHOTO]} />
-              </Flex>
-            </Flex>
-          </Center>
-          <Copy />
-        </Center>
+                <Flex flexDir={'column'} alignItems={'center'} gap={'12px'}>
+                  <Name />
+                  <Description />
+                </Flex>
+                <Copy />
+              </Center>
+            </Center>
+          ) : (
+            <Center flexDir={'column'} gap={'16px'} minH={'100vh'} pt={'48px'}>
+              <Center alignItems={'center'} gap={'32px'} w={'fit-content'}>
+                <Box pos={'relative'}>
+                  <Blob />
+                  <Icon />
+                </Box>
+                <Flex flexDir={'column'} gap={'32px'}>
+                  <Box>
+                    <Description />
+                    <Name />
+                  </Box>
+                  <Flex gap={'20px'}>
+                    <Links contents={LINK[LINK_WEB]} />
+                    <Links contents={LINK[LINK_PHOTO]} />
+                  </Flex>
+                </Flex>
+              </Center>
+              <Copy />
+            </Center>
+          )}
+        </>
       )}
     </>
   );
