@@ -16,7 +16,7 @@ const HeadOgp: FC = () => (
     {/* サイト名 */}
     <meta property={'og:site_name'} content={NAME} />
     {/* サムネイル画像の URL */}
-    <meta property={'og:image'} content={`${SITE_URL}/img/icon.jpg`} />
+    <meta property={'og:image'} content={`${SITE_URL}img/icon.jpg`} />
     <meta name={'twitter:card'} content={'summary'} />
   </>
 );
