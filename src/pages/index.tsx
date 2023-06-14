@@ -1,22 +1,34 @@
 import { FC } from 'react';
 import { NextPage } from 'next';
-import { Box, Center, Flex, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { Box, Center, Flex, Text, keyframes } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 import Icon from '@/components/Icon';
 
+import { NAME, TITLE_LIST } from '@/constants/common';
 import { LINK, LINK_PHOTO, LINK_WEB } from '@/constants/link';
 
-import { LinksHeadlineType, LinksType } from '@/types/link';
-import { NAME, TITLE_LIST } from '@/constants/common';
 import { TitleListType } from '@/types/common';
+import { LinksHeadlineType, LinksType } from '@/types/link';
+
+const animationKeyframes = keyframes`
+  0% { transform: translateY(0); }
+  15% { transform: translateY(4px); }
+  30% { transform: translateY(0px); }
+  45% { transform: translateY(4px); }
+  60% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+`;
+
+const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 const Home: NextPage = () => {
   const Links: FC<{
     contents: LinksType[LinksHeadlineType];
   }> = ({ contents }) => {
     return (
-      <Flex as={'ul'} gap={'12px'}>
+      <Flex as={'ul'} gap={'8px'}>
         {contents.contents.map((item) => (
           <Center as={'li'} key={item.title}>
             <NextLink href={item.path} passHref>
@@ -51,7 +63,12 @@ const Home: NextPage = () => {
   };
 
   const Name = () => (
-    <Text as={'h1'} fontSize={'4rem'} fontFamily={'heading'}>
+    <Text
+      as={'h1'}
+      fontSize={'4rem'}
+      fontFamily={'heading'}
+      lineHeight={'5rem'}
+    >
       {NAME}
     </Text>
   );
@@ -89,6 +106,8 @@ const Home: NextPage = () => {
 
   const Blob = () => (
     <Center
+      as={motion.div}
+      animation={animation}
       bg={'lightGray'}
       p={'12px 40px'}
       borderRadius={'9999px'}
@@ -116,12 +135,12 @@ const Home: NextPage = () => {
 
   return (
     <Center minH={'95vh'} p={'64px 0'}>
-      <Center flexDir={'column'} gap={'16px'} w={'fit-content'} m={'auto'}>
+      <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
         <Blob />
         <Links contents={LINK[LINK_WEB]} />
         <Icon />
         <Links contents={LINK[LINK_PHOTO]} />
-        <Flex flexDir={'column'} alignItems={'center'} gap={'10px'}>
+        <Flex flexDir={'column'} alignItems={'center'} gap={'12px'}>
           <Name />
           <Description />
         </Flex>
