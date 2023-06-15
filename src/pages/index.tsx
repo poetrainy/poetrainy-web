@@ -61,7 +61,6 @@ const Home: NextPage = () => {
                 target={'_blank'}
                 w={'72px'}
                 h={'72px'}
-                // bg={contents.color}
                 borderRadius={'9999px'}
                 opacity={1}
                 transition={'0.2s opacity'}
@@ -72,17 +71,7 @@ const Home: NextPage = () => {
                 bgRepeat={'no-repeat'}
                 bgSize={'32px 32px'}
                 bgPos={'center'}
-              >
-                {/* <Box as={'span'} display={'block'} w={'32px'} h={'32px'}> */}
-                {/* <Box
-                    as={'img'}
-                    src={`/img/${item.icon}`}
-                    alt={item.title}
-                    w={'100%'}
-                    h={'100%'}
-                  /> */}
-                {/* </Box> */}
-              </Center>
+              />
             </NextLink>
           </Center>
         ))}
@@ -116,20 +105,11 @@ const Home: NextPage = () => {
         w={'224px'}
         h={'224px'}
         borderRadius={'9999px'}
-        pos={'absolute'}
-        inset={'auto'}
+        bg={'url("/img/icon.jpg") no-repeat'}
+        bgSize={'contain'}
         overflow={'hidden'}
-      >
-        <Box
-          as={'img'}
-          src={'/img/icon.jpg'}
-          w={'100%'}
-          h={'100%'}
-          objectFit={'cover'}
-          alt={NAME}
-          zIndex={5}
-        />
-      </Center>
+        zIndex={5}
+      />
     </Center>
   );
 
