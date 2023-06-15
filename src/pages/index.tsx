@@ -191,7 +191,7 @@ const Home: NextPage = () => {
   return (
     <>
       {isSP ? (
-        <Center minH={'95vh'} p={'56px 0 64px'}>
+        <Center minH={'120vh'}>
           <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
             <Box
               textStyle={'transition'}
