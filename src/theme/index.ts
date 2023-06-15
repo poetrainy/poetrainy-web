@@ -45,12 +45,10 @@ const breakpoints = {
   lg: '820px',
 };
 const textStyles = {
-  bodyWidth: {
-    width: {
-      base: '90vw',
-      sm: '80vw',
-    },
-    mx: 'auto',
+  transition: {
+    opacity: 0,
+    transform: 'translateY(-10px)',
+    transition: 'opacity 0.3s, transform 0.3s',
   },
 };
 
