@@ -50,6 +50,11 @@ const textStyles = {
     transform: 'translateY(-10px)',
     transition: 'opacity 0.3s, transform 0.3s',
   },
+  image: {
+    w: '100%',
+    h: '100%',
+    objectFit: 'cover',
+  },
 };
 
 const theme = extendTheme({
