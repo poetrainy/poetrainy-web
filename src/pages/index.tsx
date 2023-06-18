@@ -21,7 +21,7 @@ const animationKeyframes = keyframes`
   100% { transform: translateY(0); }
 `;
 
-const animation = `${animationKeyframes} 2.5s ease-in-out infinite`;
+const animation = `${animationKeyframes} 2.5s 1.8s ease-in-out infinite`;
 
 const Home: NextPage = () => {
   const { isSP } = useWindowSize();
