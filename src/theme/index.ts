@@ -50,6 +50,11 @@ const textStyles = {
     transform: 'translateY(-10px)',
     transition: 'opacity 0.3s, transform 0.3s',
   },
+  transitionDesign: {
+    opacity: 0,
+    transform: 'scale(95%)',
+    transition: 'opacity 0.3s, transform 0.3s',
+  },
   image: {
     w: '100%',
     h: '100%',

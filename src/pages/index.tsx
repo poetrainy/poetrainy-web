@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { NextPage } from 'next';
 import { motion } from 'framer-motion';
 import { Box, Center, Flex, Text, keyframes } from '@chakra-ui/react';
@@ -11,6 +11,7 @@ import { TitleListType } from '@/types/common';
 import { LinksHeadlineType, LinksType } from '@/types/link';
 
 import { useWindowSize } from '@/hooks/useJudgeSP';
+import { useFadeIn } from '@/hooks/useFadeIn';
 
 const animationKeyframes = keyframes`
   0% { transform: translateY(0); }
@@ -25,28 +26,7 @@ const animation = `${animationKeyframes} 2.5s 1.8s ease-in-out infinite`;
 
 const Home: NextPage = () => {
   const { isSP } = useWindowSize();
-  const [fadeInCount, setFadeInCount] = useState<number>(0);
-  const [isFadeInArray, setIsFadeInArray] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const keepIsFadeInArray = isFadeInArray.map(
-        (element: boolean, i: number) => {
-          if (i === fadeInCount) return true;
-          return element;
-        }
-      );
-      setIsFadeInArray(keepIsFadeInArray);
-      if (fadeInCount + 1 === isFadeInArray.length) return;
-      setFadeInCount(fadeInCount + 1);
-    }, 300);
-  }, [fadeInCount]);
+  const fadeIn = useFadeIn(5, 300);
 
   const Links: FC<{
     contents: LinksType[LinksHeadlineType];
@@ -197,7 +177,7 @@ const Home: NextPage = () => {
               textStyle={'transition'}
               sx={{
                 pos: 'relative',
-                ...(isFadeInArray[3] && {
+                ...(fadeIn[3] && {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
@@ -208,7 +188,7 @@ const Home: NextPage = () => {
             <Box
               textStyle={'transition'}
               sx={{
-                ...(isFadeInArray[1] && {
+                ...(fadeIn[1] && {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
@@ -219,7 +199,7 @@ const Home: NextPage = () => {
             <Box
               textStyle={'transition'}
               sx={{
-                ...(isFadeInArray[0] && {
+                ...(fadeIn[0] && {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
@@ -230,7 +210,7 @@ const Home: NextPage = () => {
             <Box
               textStyle={'transition'}
               sx={{
-                ...(isFadeInArray[2] && {
+                ...(fadeIn[2] && {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
@@ -244,7 +224,7 @@ const Home: NextPage = () => {
               gap={'12px'}
               textStyle={'transition'}
               sx={{
-                ...(isFadeInArray[3] && {
+                ...(fadeIn[3] && {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
@@ -256,7 +236,7 @@ const Home: NextPage = () => {
             <Box
               textStyle={'transition'}
               sx={{
-                ...(isFadeInArray[4] && {
+                ...(fadeIn[4] && {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
@@ -275,7 +255,7 @@ const Home: NextPage = () => {
                 sx={{
                   pos: 'absolute',
                   inset: '-96px auto auto auto',
-                  ...(isFadeInArray[3] && {
+                  ...(fadeIn[3] && {
                     opacity: 1,
                     transform: 'translateY(0)',
                   }),
@@ -286,7 +266,7 @@ const Home: NextPage = () => {
               <Box
                 textStyle={'transition'}
                 sx={{
-                  ...(isFadeInArray[0] && {
+                  ...(fadeIn[0] && {
                     opacity: 1,
                     transform: 'translateY(0)',
                   }),
@@ -299,7 +279,7 @@ const Home: NextPage = () => {
               <Box
                 textStyle={'transition'}
                 sx={{
-                  ...(isFadeInArray[1] && {
+                  ...(fadeIn[1] && {
                     opacity: 1,
                     transform: 'translateY(0)',
                   }),
@@ -312,7 +292,7 @@ const Home: NextPage = () => {
                 gap={'20px'}
                 textStyle={'transition'}
                 sx={{
-                  ...(isFadeInArray[2] && {
+                  ...(fadeIn[2] && {
                     opacity: 1,
                     transform: 'translateY(0)',
                   }),
@@ -326,7 +306,7 @@ const Home: NextPage = () => {
           <Box
             textStyle={'transition'}
             sx={{
-              ...(isFadeInArray[4] && {
+              ...(fadeIn[4] && {
                 opacity: 1,
                 transform: 'translateY(0)',
               }),
