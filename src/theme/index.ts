@@ -40,7 +40,7 @@ const fonts = {
   sp: "'League Spartan', sans-serif",
 };
 const breakpoints = {
-  sm: '500px',
+  sm: '480px',
   md: '640px',
   lg: '820px',
 };
