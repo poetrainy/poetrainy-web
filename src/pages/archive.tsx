@@ -11,6 +11,7 @@ import { NAME } from '@/constants/common';
 
 import { MicroCMSDesignType, MicroCMSWebType } from '@/types/microCMS';
 import { useFadeIn } from '@/hooks/useFadeIn';
+import base from '@emotion/styled/types/base';
 
 type Props = {
   microCMSWebData: MicroCMSWebType[];
@@ -23,7 +24,6 @@ const Archive: NextPage<Props> = ({
   microCMSDesignData,
   microCMSVtuberData,
 }) => {
-  // console.log('log' + microCMSDesignData.length);
   const fadeIn = useFadeIn(microCMSDesignData.length, 70);
 
   const Header: () => JSX.Element = () => (
@@ -35,69 +35,22 @@ const Archive: NextPage<Props> = ({
     </Flex>
   );
 
-  // const Design: () => JSX.Element = () => (
-  //   <Grid
-  //     as={'ul'}
-  //     templateAreas={`"tsukinami tsukinami seijun wd3"
-  //                     "tsukinami tsukinami seijun yoshio"
-  //                     "tsukinami tsukinami requested-namecard yoshio"
-  //                     "osaketate utakata requested-namecard yoshio"
-  //                     "osaketate utakata web-study web-study"
-  //                     "jishatecho utakata web-study web-study"`}
-  //     gridTemplateColumns={'25vw 30vw 20vw 25vw'}
-  //     gridTemplateRows={
-  //       'calc(25vw / 3 * 2) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 2)'
-  //     }
-  //   >
-  //     {microCMSDesignData.map((item: MicroCMSDesignType, i: number) => (
-  //       <GridItem
-  //         as={'li'}
-  //         key={item.id}
-  //         area={item.id}
-  //         display={'flex'}
-  //         justifyContent={'center'}
-  //         alignItems={'center'}
-  //         pos={'relative'}
-  //         textStyle={'transition'}
-  //         sx={{
-  //           ...(fadeIn[i] && {
-  //             opacity: 1,
-  //             transform: 'translateY(0)',
-  //           }),
-  //         }}
-  //       >
-  //         <Box
-  //           display={'block'}
-  //           w={'100%'}
-  //           h={'100%'}
-  //           pos={'absolute'}
-  //           inset={0}
-  //           boxShadow={'inset 12px 12px 16px rgb(0 0 0 / 10%)'}
-  //           zIndex={'1'}
-  //           pointerEvents={'none'}
-  //         />
-  //         <Box
-  //           as={'img'}
-  //           src={`${item.image.url}?w=1000`}
-  //           alt={item.alt}
-  //           textStyle={'image'}
-  //         />
-  //       </GridItem>
-  //     ))}
-  //   </Grid>
-  // );
-
   const Vtuber: () => JSX.Element = () => (
     <Center
       as={'ul'}
       flexWrap={'wrap'}
-      gap={'2%'}
-      w={'65vw'}
-      h={'65vw'}
+      gap={{ base: '2vw', sm: '2%' }}
+      w={{ base: '100vw', sm: '65vw' }}
+      h={{ base: 'calc(100vw - 8vw)', sm: '65vw' }}
       m={'auto'}
+      p={{ base: '0 4vw' }}
     >
       {microCMSVtuberData.map((item: MicroCMSDesignType) => (
-        <Box as={'li'} key={item.id} w={'32%'}>
+        <Box
+          as={'li'}
+          key={item.id}
+          w={{ base: 'calc((100vw - 2vw * 2 - 4vw * 2 ) / 3)', sm: '32%' }}
+        >
           <Box
             as={'img'}
             src={`${item.image.url}?w=800`}
@@ -114,16 +67,28 @@ const Archive: NextPage<Props> = ({
       <Header />
       <Grid
         as={'ul'}
-        templateAreas={`"tsukinami tsukinami seijun wd3"
-                      "tsukinami tsukinami seijun yoshio"
-                      "tsukinami tsukinami requested-namecard yoshio"
-                      "osaketate utakata requested-namecard yoshio"
-                      "osaketate utakata web-study web-study"
-                      "jishatecho utakata web-study web-study"`}
-        gridTemplateColumns={'25vw 30vw 20vw 25vw'}
-        gridTemplateRows={
-          'calc(25vw / 3 * 2) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 2)'
-        }
+        templateAreas={{
+          base: `"tsukinami tsukinami tsukinami wd3"
+                "tsukinami tsukinami tsukinami requested-namecard"
+                "seijun osaketate osaketate requested-namecard"
+                "seijun utakata utakata utakata"
+                "web-study utakata utakata utakata"
+                "jishatecho jishatecho yoshio yoshio"`,
+          sm: `"tsukinami tsukinami seijun wd3"
+                "tsukinami tsukinami seijun yoshio"
+                "tsukinami tsukinami requested-namecard yoshio"
+                "osaketate utakata requested-namecard yoshio"
+                "osaketate utakata web-study web-study"
+                "jishatecho utakata web-study web-study"`,
+        }}
+        gridTemplateColumns={{
+          base: '40vw 20vw 5vw 35vw',
+          sm: '25vw 30vw 20vw 25vw',
+        }}
+        gridTemplateRows={{
+          base: '35vw calc(35vw / 2) 25vw 30vw 50vw 55vw',
+          sm: 'calc(25vw / 3 * 2) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 2)',
+        }}
       >
         {microCMSDesignData.map((item: MicroCMSDesignType, i: number) => (
           <GridItem
