@@ -41,8 +41,8 @@ const fonts = {
 };
 const breakpoints = {
   sm: '480px',
-  md: '640px',
-  lg: '820px',
+  // md: '640px',
+  // lg: '820px',
 };
 const textStyles = {
   transition: {

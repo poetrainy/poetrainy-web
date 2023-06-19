@@ -10,7 +10,7 @@ import { LINK, LINK_PHOTO, LINK_WEB } from '@/constants/link';
 import { TitleListType } from '@/types/common';
 import { LinksHeadlineType, LinksType } from '@/types/link';
 
-import { useWindowSize } from '@/hooks/useJudgeSP';
+import { useWindowSize } from '@/hooks/useWindowSize';
 import { useFadeIn } from '@/hooks/useFadeIn';
 
 const animationKeyframes = keyframes`
@@ -25,7 +25,7 @@ const animationKeyframes = keyframes`
 const animation = `${animationKeyframes} 2.5s 1.8s ease-in-out infinite`;
 
 const Home: NextPage = () => {
-  const { isSP } = useWindowSize();
+  const { isMD } = useWindowSize();
   const fadeIn = useFadeIn(5, 300);
 
   const Links: FC<{
@@ -170,7 +170,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      {isSP ? (
+      {isMD ? (
         <Center minH={'120vh'}>
           <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
             <Box
