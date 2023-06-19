@@ -10,8 +10,9 @@ import {
 import { NAME } from '@/constants/common';
 
 import { MicroCMSDesignType, MicroCMSWebType } from '@/types/microCMS';
+
 import { useFadeIn } from '@/hooks/useFadeIn';
-import base from '@emotion/styled/types/base';
+import { useWindowSize } from '@/hooks/useWindowSize';
 
 type Props = {
   microCMSWebData: MicroCMSWebType[];
@@ -24,6 +25,7 @@ const Archive: NextPage<Props> = ({
   microCMSDesignData,
   microCMSVtuberData,
 }) => {
+  const { isSM } = useWindowSize();
   const fadeIn = useFadeIn(microCMSDesignData.length, 70);
 
   const Header: () => JSX.Element = () => (
@@ -53,7 +55,7 @@ const Archive: NextPage<Props> = ({
         >
           <Box
             as={'img'}
-            src={`${item.image.url}?w=800`}
+            src={isSM ? `${item.image.url}?w=500` : `${item.image.url}?w=800`}
             alt={item.alt}
             textStyle={'image'}
           />
@@ -64,7 +66,6 @@ const Archive: NextPage<Props> = ({
 
   return (
     <>
-      <Header />
       <Grid
         as={'ul'}
         templateAreas={{
@@ -119,13 +120,31 @@ const Archive: NextPage<Props> = ({
             />
             <Box
               as={'img'}
-              src={`${item.image.url}?w=1000`}
+              src={
+                isSM ? `${item.image.url}?w=800` : `${item.image.url}?w=1000`
+              }
               alt={item.alt}
               textStyle={'image'}
             />
           </GridItem>
         ))}
       </Grid>
+      <Box w={'100vw'} overflow={'hidden'}>
+        <Flex
+          as={'ul'}
+          gap={'0 10vw'}
+          alignItems={'center'}
+          w={'fit-content'}
+          h={'80vh'}
+          p={'0 5vw'}
+        >
+          {microCMSWebData.map((item, i) => (
+            <Box as={'li'} key={item.id} w={'60vw'}>
+              <Box as={'img'} src={item.image.url} alt={item.title} />
+            </Box>
+          ))}
+        </Flex>
+      </Box>
       <Vtuber />
     </>
   );
@@ -161,7 +180,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      microCMSWebData: microCMSWebResult.contents,
+      microCMSWebData: microCMSWebResult.contents.reverse(),
       microCMSDesignData: designData,
       microCMSVtuberData: vtuberData,
     },

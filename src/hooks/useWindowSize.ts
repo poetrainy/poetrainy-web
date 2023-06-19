@@ -1,17 +1,24 @@
 import { useLayoutEffect, useState } from 'react';
 
-const BREAKPOINT = 800;
+const BREAKPOINT_MD = 800;
+const BREAKPOINT_SM = 480;
 
 export const useWindowSize = () => {
-  const [width, setWidth] = useState<{ size: number; isSP: boolean }>({
+  const [width, setWidth] = useState<{
+    size: number;
+    isSM: boolean;
+    isMD: boolean;
+  }>({
     size: 0,
-    isSP: true,
+    isSM: true,
+    isMD: true,
   });
   useLayoutEffect(() => {
     const updateWidth = (): void => {
       setWidth({
         size: window.innerWidth,
-        isSP: BREAKPOINT > window.innerWidth,
+        isSM: BREAKPOINT_SM > window.innerWidth,
+        isMD: BREAKPOINT_MD > window.innerWidth,
       });
     };
 
