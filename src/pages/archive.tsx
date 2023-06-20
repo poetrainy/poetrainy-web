@@ -222,42 +222,47 @@ const Archive: NextPage<Props> = ({
           </Flex>
         </Box>
         {isSM && (
-          <>
-            <OriginalSpacer size={'16px'} />
-            <Flex justifyContent={'space-between'} p={'0 20vw'}>
-              <Box w={'88px'} h={'32px'} bg={'green'}>
-                View
-              </Box>
-              <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
-                {microCMSWebData.map((item, i) => (
-                  <Box
-                    as={'li'}
-                    key={item.title}
-                    w={'4px'}
-                    h={'32px'}
-                    bg={'black300'}
-                    transition={'background 0.2s'}
-                    _hover={{
-                      cursor: 'pointer',
-                    }}
-                    sx={{
-                      ...(i === webCount && {
-                        bg: 'green',
-                      }),
-                    }}
-                    onClick={() => webPagerClick(i)}
-                  />
-                ))}
-              </Flex>
+          <Flex justifyContent={'space-between'} p={'16px 20vw 8vh'}>
+            <Flex
+              alignItems={'center'}
+              w={'96px'}
+              h={'40px'}
+              color={'white'}
+              bg={'green'}
+              fontFamily={'sp'}
+              fontSize={'1.8rem'}
+              p={'2px 8px 0'}
+            >
+              View
             </Flex>
-            <OriginalSpacer size={'8vh'} />
-          </>
+            <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
+              {microCMSWebData.map((item, i) => (
+                <Box
+                  as={'li'}
+                  key={item.title}
+                  w={'4px'}
+                  h={'40px'}
+                  bg={'black300'}
+                  transition={'background 0.2s'}
+                  _hover={{
+                    cursor: 'pointer',
+                  }}
+                  sx={{
+                    ...(i === webCount && {
+                      bg: 'green',
+                    }),
+                  }}
+                  onClick={() => webPagerClick(i)}
+                />
+              ))}
+            </Flex>
+          </Flex>
         )}
       </>
       <Vtuber />
-      <OriginalSpacer size={'48px'} />
+      <OriginalSpacer size={isSM ? '24px' : '48px'} />
       <Copyright />
-      <OriginalSpacer size={'120px'} />
+      <OriginalSpacer size={isSM ? '56px' : '120px'} />
     </>
   );
 };
