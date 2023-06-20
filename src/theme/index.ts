@@ -3,8 +3,10 @@ import { extendTheme } from '@chakra-ui/react';
 const colors = {
   white: '#FFFFFF',
   green: '#086776',
-  black: '#383838',
-  lightGray: '#F6F6F6',
+  black800: '#383838',
+  black600: '#8e8e8e',
+  black300: '#dedede',
+  black100: '#F6F6F6',
 };
 const styles = {
   global: {
@@ -12,7 +14,7 @@ const styles = {
       fontSize: '62.5%',
     },
     body: {
-      color: 'black',
+      color: 'black800',
       fontSize: '1.3rem',
       fontFamily: 'body',
       a: {

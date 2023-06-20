@@ -63,7 +63,7 @@ const Home: NextPage = () => {
     <Center
       w={'240px'}
       h={'240px'}
-      bg={'black'}
+      bg={'black800'}
       borderRadius={'9999px'}
       overflow={'hidden'}
       pos={'relative'}
@@ -143,7 +143,7 @@ const Home: NextPage = () => {
     <Center
       as={motion.div}
       animation={animation}
-      bg={'lightGray'}
+      bg={'black100'}
       p={'12px 40px'}
       borderRadius={'9999px'}
       lineHeight={'2rem'}

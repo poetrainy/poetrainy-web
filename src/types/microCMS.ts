@@ -23,6 +23,7 @@ export type MicroCMSDesignItemType =
 
 export type MicroCMSWebType = MicroCMSType & {
   title: string;
+  copy: string;
   image: MicroCMSImageType;
   url: string;
   description: string;
