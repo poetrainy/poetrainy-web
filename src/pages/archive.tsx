@@ -1,7 +1,10 @@
+import { TouchEvent, useState } from 'react';
 import type { NextPage } from 'next';
 import { Box, Center, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 
 import { client } from '@/libs/client';
+
+import OriginalSpacer from '@/components/OriginalSpacer';
 
 import {
   MICROCMS_DESIGN_TYPE_MAIN,
@@ -27,6 +30,41 @@ const Archive: NextPage<Props> = ({
 }) => {
   const { isSM } = useWindowSize();
   const fadeIn = useFadeIn(microCMSDesignData.length, 70);
+  const [webCount, setWebCount] = useState<number>(0);
+  const [webTouchLocation, setWebTouchLocation] = useState({
+    start: 0,
+    end: 0,
+  });
+
+  const webTouchFunc = (e: TouchEvent<HTMLDivElement>, isStart?: boolean) => {
+    if (!isSM) return;
+
+    const touchObject = e.changedTouches[0];
+    const keepWebTouchLocation: number = touchObject.pageX;
+
+    // touchStartのとき
+    if (isStart)
+      return setWebTouchLocation((prevWebTouchLocation) => {
+        return { ...prevWebTouchLocation, start: keepWebTouchLocation };
+      });
+
+    // touchEndのとき
+    setWebTouchLocation((prevWebTouchLocation) => {
+      return { ...prevWebTouchLocation, end: keepWebTouchLocation };
+    });
+    if (webTouchLocation.start - keepWebTouchLocation > 20) {
+      if (webCount === microCMSWebData.length - 1) return;
+      setWebCount(webCount + 1);
+    }
+    if (webTouchLocation.start - keepWebTouchLocation < -20) {
+      if (webCount === 0) return;
+      setWebCount(webCount - 1);
+    }
+  };
+
+  const webPagerClick = (i: number) => {
+    setWebCount(i);
+  };
 
   const Header: () => JSX.Element = () => (
     <Flex as={'header'}>
@@ -41,17 +79,17 @@ const Archive: NextPage<Props> = ({
     <Center
       as={'ul'}
       flexWrap={'wrap'}
-      gap={{ base: '2vw', sm: '2%' }}
+      gap={{ base: '1vw', sm: '2%' }}
       w={{ base: '100vw', sm: '65vw' }}
-      h={{ base: 'calc(100vw - 8vw)', sm: '65vw' }}
+      h={{ base: 'calc(100vw - 6vw)', sm: '65vw' }}
       m={'auto'}
-      p={{ base: '0 4vw' }}
+      p={{ base: '0 2vw' }}
     >
       {microCMSVtuberData.map((item: MicroCMSDesignType) => (
         <Box
           as={'li'}
           key={item.id}
-          w={{ base: 'calc((100vw - 2vw * 2 - 4vw * 2 ) / 3)', sm: '32%' }}
+          w={{ base: 'calc((100vw - 1vw * 2 - 2vw * 2 ) / 3)', sm: '32%' }}
         >
           <Box
             as={'img'}
@@ -129,22 +167,79 @@ const Archive: NextPage<Props> = ({
           </GridItem>
         ))}
       </Grid>
-      <Box w={'100vw'} overflow={'hidden'}>
-        <Flex
-          as={'ul'}
-          gap={'0 10vw'}
-          alignItems={'center'}
-          w={'fit-content'}
-          h={'80vh'}
-          p={'0 5vw'}
+      <OriginalSpacer size={'8vh'} />
+      <>
+        <Box
+          w={'100vw'}
+          overflow={'hidden'}
+          onTouchStart={(e) => webTouchFunc(e, true)}
+          onTouchEnd={(e) => webTouchFunc(e)}
         >
-          {microCMSWebData.map((item, i) => (
-            <Box as={'li'} key={item.id} w={'60vw'}>
-              <Box as={'img'} src={item.image.url} alt={item.title} />
-            </Box>
-          ))}
+          <Flex
+            as={'ul'}
+            gap={'0 15vw'}
+            alignItems={'center'}
+            w={'fit-content'}
+            transform={`translateX(calc(20vw - 75vw * ${webCount}))`}
+            transition={'transform 0.2s'}
+          >
+            {microCMSWebData.map((item, i) => (
+              <Flex
+                as={'li'}
+                key={item.id}
+                flexDir={'column'}
+                gap={'24px'}
+                w={'60vw'}
+              >
+                <Box as={'img'} src={item.image.url} alt={item.title} />
+                <Box>
+                  <Text color={'black600'} fontSize={'1.2rem'}>
+                    {item.copy}
+                  </Text>
+                  <OriginalSpacer size={'2px'} />
+                  <Flex
+                    alignItems={'flex-start'}
+                    h={'64px'}
+                    fontWeight={'bold'}
+                    fontSize={'2.2rem'}
+                    letterSpacing={0.1}
+                  >
+                    {item.title}
+                  </Flex>
+                </Box>
+              </Flex>
+            ))}
+          </Flex>
+        </Box>
+        <OriginalSpacer size={'16px'} />
+        <Flex justifyContent={'space-between'} p={'0 20vw'}>
+          <Box w={'88px'} h={'32px'} bg={'green'}>
+            View
+          </Box>
+          <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
+            {microCMSWebData.map((item, i) => (
+              <Box
+                as={'li'}
+                key={item.title}
+                w={'4px'}
+                h={'32px'}
+                bg={'black300'}
+                transition={'background 0.2s'}
+                _hover={{
+                  cursor: 'pointer',
+                }}
+                sx={{
+                  ...(i === webCount && {
+                    bg: 'green',
+                  }),
+                }}
+                onClick={() => webPagerClick(i)}
+              />
+            ))}
+          </Flex>
         </Flex>
-      </Box>
+      </>
+      <OriginalSpacer size={'8vh'} />
       <Vtuber />
     </>
   );
