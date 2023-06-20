@@ -189,7 +189,7 @@ const Archive: NextPage<Props> = ({
               base: `translateX(calc(20vw - 75vw * ${webCount}))`,
               sm: 'none',
             }}
-            transition={'transform 0.2s'}
+            transition={'transform 0.3s'}
           >
             {microCMSWebData.map((item, i) => (
               <Flex
