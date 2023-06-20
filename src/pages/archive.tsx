@@ -222,8 +222,14 @@ const Archive: NextPage<Props> = ({
           </Flex>
         </Box>
         {isSM && (
-          <Flex justifyContent={'space-between'} p={'16px 20vw 8vh'}>
+          <Flex
+            justifyContent={'space-between'}
+            h={'40px'}
+            m={'16px 0 8vh'}
+            p={'0 20vw'}
+          >
             <Flex
+              as={'button'}
               alignItems={'center'}
               w={'96px'}
               h={'40px'}
@@ -237,23 +243,24 @@ const Archive: NextPage<Props> = ({
             </Flex>
             <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
               {microCMSWebData.map((item, i) => (
-                <Box
-                  as={'li'}
-                  key={item.title}
-                  w={'4px'}
-                  h={'40px'}
-                  bg={'black300'}
-                  transition={'background 0.2s'}
-                  _hover={{
-                    cursor: 'pointer',
-                  }}
-                  sx={{
-                    ...(i === webCount && {
-                      bg: 'green',
-                    }),
-                  }}
-                  onClick={() => webPagerClick(i)}
-                />
+                <Box as={'li'} key={item.title}>
+                  <Box
+                    as={'button'}
+                    w={'4px'}
+                    h={'40px'}
+                    bg={'black300'}
+                    transition={'background 0.2s'}
+                    _hover={{
+                      cursor: 'pointer',
+                    }}
+                    sx={{
+                      ...(i === webCount && {
+                        bg: 'green',
+                      }),
+                    }}
+                    onClick={() => webPagerClick(i)}
+                  />
+                </Box>
               ))}
             </Flex>
           </Flex>
