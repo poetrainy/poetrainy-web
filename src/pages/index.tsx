@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Box, Center, Flex, Text, keyframes } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-import Copyright from '@/components/Home/Copyright';
+import Copyright from '@/components/Copyright';
 import Blob from '@/components/Home/Blob';
 import Icon from '@/components/Home/Icon';
 import Description from '@/components/Home/Description';

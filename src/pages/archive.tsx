@@ -4,6 +4,7 @@ import { Box, Center, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 
 import { client } from '@/libs/client';
 
+import Copyright from '@/components/Copyright';
 import OriginalSpacer from '@/components/OriginalSpacer';
 
 import {
@@ -83,7 +84,7 @@ const Archive: NextPage<Props> = ({
       w={{ base: '100vw', sm: '65vw' }}
       h={{ base: 'calc(100vw - 6vw)', sm: '65vw' }}
       m={'auto'}
-      p={{ base: '0 2vw' }}
+      p={{ base: '0 2vw', sm: 0 }}
     >
       {microCMSVtuberData.map((item: MicroCMSDesignType) => (
         <Box
@@ -167,7 +168,7 @@ const Archive: NextPage<Props> = ({
           </GridItem>
         ))}
       </Grid>
-      <OriginalSpacer size={'8vh'} />
+      {isSM && <OriginalSpacer size={'8vh'} />}
       <>
         <Box
           w={'100vw'}
@@ -177,10 +178,17 @@ const Archive: NextPage<Props> = ({
         >
           <Flex
             as={'ul'}
-            gap={'0 15vw'}
+            gap={{ base: '15vw', sm: '48px' }}
             alignItems={'center'}
             w={'fit-content'}
-            transform={`translateX(calc(20vw - 75vw * ${webCount}))`}
+            h={{ md: '120vh' }}
+            maxH={{ md: '880px' }}
+            m={{ sm: 'auto' }}
+            p={{ sm: '0 64px' }}
+            transform={{
+              base: `translateX(calc(20vw - 75vw * ${webCount}))`,
+              sm: 'none',
+            }}
             transition={'transform 0.2s'}
           >
             {microCMSWebData.map((item, i) => (
@@ -189,7 +197,9 @@ const Archive: NextPage<Props> = ({
                 key={item.id}
                 flexDir={'column'}
                 gap={'24px'}
-                w={'60vw'}
+                w={{ base: '60vw', sm: '20vw' }}
+                maxW={{ sm: '240px' }}
+                minW={{ sm: '200px' }}
               >
                 <Box as={'img'} src={item.image.url} alt={item.title} />
                 <Box>
@@ -211,36 +221,43 @@ const Archive: NextPage<Props> = ({
             ))}
           </Flex>
         </Box>
-        <OriginalSpacer size={'16px'} />
-        <Flex justifyContent={'space-between'} p={'0 20vw'}>
-          <Box w={'88px'} h={'32px'} bg={'green'}>
-            View
-          </Box>
-          <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
-            {microCMSWebData.map((item, i) => (
-              <Box
-                as={'li'}
-                key={item.title}
-                w={'4px'}
-                h={'32px'}
-                bg={'black300'}
-                transition={'background 0.2s'}
-                _hover={{
-                  cursor: 'pointer',
-                }}
-                sx={{
-                  ...(i === webCount && {
-                    bg: 'green',
-                  }),
-                }}
-                onClick={() => webPagerClick(i)}
-              />
-            ))}
-          </Flex>
-        </Flex>
+        {isSM && (
+          <>
+            <OriginalSpacer size={'16px'} />
+            <Flex justifyContent={'space-between'} p={'0 20vw'}>
+              <Box w={'88px'} h={'32px'} bg={'green'}>
+                View
+              </Box>
+              <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
+                {microCMSWebData.map((item, i) => (
+                  <Box
+                    as={'li'}
+                    key={item.title}
+                    w={'4px'}
+                    h={'32px'}
+                    bg={'black300'}
+                    transition={'background 0.2s'}
+                    _hover={{
+                      cursor: 'pointer',
+                    }}
+                    sx={{
+                      ...(i === webCount && {
+                        bg: 'green',
+                      }),
+                    }}
+                    onClick={() => webPagerClick(i)}
+                  />
+                ))}
+              </Flex>
+            </Flex>
+            <OriginalSpacer size={'8vh'} />
+          </>
+        )}
       </>
-      <OriginalSpacer size={'8vh'} />
       <Vtuber />
+      <OriginalSpacer size={'48px'} />
+      <Copyright />
+      <OriginalSpacer size={'120px'} />
     </>
   );
 };

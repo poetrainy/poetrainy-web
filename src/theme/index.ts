@@ -43,7 +43,7 @@ const fonts = {
 };
 const breakpoints = {
   sm: '480px',
-  // md: '640px',
+  md: '800px',
   // lg: '820px',
 };
 const textStyles = {
