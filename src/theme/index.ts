@@ -62,6 +62,9 @@ const textStyles = {
     h: '100%',
     objectFit: 'cover',
   },
+  zIndexHeader: {
+    zIndex: 10,
+  },
 };
 
 const theme = extendTheme({

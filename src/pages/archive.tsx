@@ -4,14 +4,15 @@ import { Box, Center, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 
 import { client } from '@/libs/client';
 
+import Header from '@/components/Header';
 import Copyright from '@/components/Copyright';
+import Button from '@/components/Button';
 import OriginalSpacer from '@/components/OriginalSpacer';
 
 import {
   MICROCMS_DESIGN_TYPE_MAIN,
   MICROCMS_DESIGN_TYPE_VTUBER,
 } from '@/constants/microCMS';
-import { NAME } from '@/constants/common';
 
 import { MicroCMSDesignType, MicroCMSWebType } from '@/types/microCMS';
 
@@ -67,15 +68,6 @@ const Archive: NextPage<Props> = ({
     setWebCount(i);
   };
 
-  const Header: () => JSX.Element = () => (
-    <Flex as={'header'}>
-      <Box w={'64px'} h={'64px'} borderRadius={'9999px'} overflow={'hidden'}>
-        <Box as={'img'} src={'/img/icon.jpg'} textStyle={'image'} />
-      </Box>
-      <Text as={'h1'}>{NAME}</Text>
-    </Flex>
-  );
-
   const Vtuber: () => JSX.Element = () => (
     <Center
       as={'ul'}
@@ -103,8 +95,13 @@ const Archive: NextPage<Props> = ({
     </Center>
   );
 
+  const modalOpen = () => {
+    console.log(webCount);
+  };
+
   return (
     <>
+      <Header />
       <Grid
         as={'ul'}
         templateAreas={{
@@ -228,22 +225,10 @@ const Archive: NextPage<Props> = ({
             m={'16px 0 8vh'}
             p={'0 20vw'}
           >
-            <Flex
-              as={'button'}
-              alignItems={'center'}
-              w={'96px'}
-              h={'40px'}
-              color={'white'}
-              bg={'green'}
-              fontFamily={'sp'}
-              fontSize={'1.8rem'}
-              p={'2px 8px 0'}
-            >
-              View
-            </Flex>
+            <Button text={'View'} onClick={modalOpen} />
             <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
               {microCMSWebData.map((item, i) => (
-                <Box as={'li'} key={item.title}>
+                <Box as={'li'} key={item.id + 'web'}>
                   <Box
                     as={'button'}
                     w={'4px'}
@@ -270,6 +255,119 @@ const Archive: NextPage<Props> = ({
       <OriginalSpacer size={isSM ? '24px' : '48px'} />
       <Copyright />
       <OriginalSpacer size={isSM ? '56px' : '120px'} />
+      <Flex
+        flexDir={'column'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        w={'calc(100vw - 15vw)'}
+        h={'calc(100vh - 15vw)'}
+        bg={'white'}
+        m={'auto'}
+        p={'5vw'}
+        boxShadow={'0 0 10px #00000030'}
+        pos={'fixed'}
+        inset={0}
+        zIndex={1}
+        sx={{
+          '&::before': {
+            content: '""',
+            display: 'block',
+            w: '100vw',
+            h: '100vh',
+            bg: '#0000008c',
+            pos: 'absolute',
+            inset: '-7.5vw auto auto -7.5vw',
+            zIndex: -1,
+          },
+          '&::after': {
+            content: '""',
+            display: 'block',
+            w: '100%',
+            h: '100%',
+            bg: 'white',
+            pos: 'absolute',
+            inset: 0,
+            zIndex: -1,
+            pointerEvents: 'none',
+          },
+        }}
+      >
+        <Box
+          as={'ul'}
+          w={'100%'}
+          h={'calc(100% - 5vw * 2 - 40px - 20px)'}
+          pos={'relative'}
+        >
+          {microCMSWebData.map((item, i) => (
+            <Center
+              flexDir={'column'}
+              as={'li'}
+              key={item.id + 'modal'}
+              opacity={0}
+              transition={'opacity 0.2s'}
+              pos={'absolute'}
+              sx={{
+                ...(i === webCount && {
+                  opacity: 1,
+                }),
+              }}
+            >
+              <Box w={'40vw'} zIndex={1}>
+                <Box
+                  as={'img'}
+                  src={item.image.url}
+                  alt={item.title}
+                  w={'100%'}
+                  h={'100%'}
+                  objectFit={'contain'}
+                />
+              </Box>
+              <OriginalSpacer size={'20px'} />
+              <Text color={'black600'} fontSize={'1.2rem'}>
+                {item.copy}
+              </Text>
+              <Text fontWeight={'bold'} fontSize={'2rem'}>
+                {item.title}
+              </Text>
+              <OriginalSpacer size={'8px'} />
+              <Text h={'calc(1.8rem * 4)'} fontSize={'1.2rem'}>
+                {item.description}
+              </Text>
+            </Center>
+          ))}
+        </Box>
+        <OriginalSpacer size={'20px'} />
+        <Flex
+          justifyContent={'space-between'}
+          w={'100%'}
+          h={'40px'}
+          p={'0 7.5vw'}
+        >
+          <Button text={'Go site'} onClick={modalOpen} />
+          <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
+            {microCMSWebData.map((item, i) => (
+              <Box as={'li'} key={item.title}>
+                <Box
+                  as={'button'}
+                  w={'4px'}
+                  h={'40px'}
+                  bg={'black300'}
+                  transition={'background 0.2s'}
+                  _hover={{
+                    cursor: 'pointer',
+                  }}
+                  sx={{
+                    ...(i === webCount && {
+                      bg: 'green',
+                    }),
+                  }}
+                  onClick={() => webPagerClick(i)}
+                />
+              </Box>
+            ))}
+          </Flex>
+        </Flex>
+      </Flex>
     </>
   );
 };
