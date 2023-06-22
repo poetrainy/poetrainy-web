@@ -259,8 +259,8 @@ const Archive: NextPage<Props> = ({
         flexDir={'column'}
         justifyContent={'center'}
         alignItems={'center'}
-        w={'calc(100vw - 15vw)'}
-        h={'calc(100vh - 15vw)'}
+        w={'calc(100vw - 10vw)'}
+        h={'calc(100vh - 30vw)'}
         bg={'white'}
         m={'auto'}
         p={'5vw'}
@@ -276,7 +276,7 @@ const Archive: NextPage<Props> = ({
             h: '100vh',
             bg: '#0000008c',
             pos: 'absolute',
-            inset: '-7.5vw auto auto -7.5vw',
+            inset: '-15vw auto auto -5vw',
             zIndex: -1,
           },
           '&::after': {
@@ -295,7 +295,7 @@ const Archive: NextPage<Props> = ({
         <Box
           as={'ul'}
           w={'100%'}
-          h={'calc(100% - 5vw * 2 - 40px - 20px)'}
+          h={'80%'}
           pos={'relative'}
         >
           {microCMSWebData.map((item, i) => (
@@ -312,7 +312,7 @@ const Archive: NextPage<Props> = ({
                 }),
               }}
             >
-              <Box w={'40vw'} zIndex={1}>
+              <Box h={'45vh'} zIndex={1}>
                 <Box
                   as={'img'}
                   src={item.image.url}
@@ -341,7 +341,7 @@ const Archive: NextPage<Props> = ({
           justifyContent={'space-between'}
           w={'100%'}
           h={'40px'}
-          p={'0 7.5vw'}
+          p={'0 10vw'}
         >
           <Button text={'Go site'} onClick={modalOpen} />
           <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
