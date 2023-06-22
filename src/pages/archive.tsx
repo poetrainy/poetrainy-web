@@ -260,7 +260,7 @@ const Archive: NextPage<Props> = ({
         justifyContent={'center'}
         alignItems={'center'}
         w={'calc(100vw - 10vw)'}
-        h={'calc(100vh - 30vw)'}
+        h={'calc(80vh)'}
         bg={'white'}
         m={'auto'}
         p={'5vw'}
@@ -276,7 +276,7 @@ const Archive: NextPage<Props> = ({
             h: '100vh',
             bg: '#0000008c',
             pos: 'absolute',
-            inset: '-15vw auto auto -5vw',
+            inset: '-10vh auto auto -5vw',
             zIndex: -1,
           },
           '&::after': {
@@ -312,7 +312,7 @@ const Archive: NextPage<Props> = ({
                 }),
               }}
             >
-              <Box h={'45vh'} zIndex={1}>
+              <Box h={'40vh'} zIndex={1}>
                 <Box
                   as={'img'}
                   src={item.image.url}
@@ -326,10 +326,11 @@ const Archive: NextPage<Props> = ({
               <Text color={'black600'} fontSize={'1.2rem'}>
                 {item.copy}
               </Text>
+              <OriginalSpacer size={'2px'} />
               <Text fontWeight={'bold'} fontSize={'2rem'}>
                 {item.title}
               </Text>
-              <OriginalSpacer size={'8px'} />
+              <OriginalSpacer size={'12px'} />
               <Text h={'calc(1.8rem * 4)'} fontSize={'1.2rem'}>
                 {item.description}
               </Text>
