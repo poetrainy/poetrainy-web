@@ -1,13 +1,38 @@
 import { FC } from 'react';
-import Script from 'next/script';
+import { useRouter } from 'next/router';
+import { Box, Text } from '@chakra-ui/react';
 
-import { Box } from '@chakra-ui/react';
+import Header from '@/components/Header';
+import OriginalSpacer from '@/components/OriginalSpacer';
+import Copyright from '@/components/Copyright';
+import Button from '@/components/Button';
 
 const ContactThanks: FC = () => {
+  const router = useRouter();
+
+  const modalOpen = () => {
+    router.push('/archive');
+  };
+
   return (
-    <Box as={'main'} sx={{ '>.sf-form-cover': { display: 'none' } }}>
-      お問い合わせ完了
-    </Box>
+    <>
+      <Header />
+      <OriginalSpacer size={`${144 + 40}px`} />
+      <Box w={'80vw'} maxW={'1000px'} m={'auto'}>
+        <Text as={'h2'} fontSize={'1.8rem'}>
+          お問い合わせ完了
+        </Text>
+        <OriginalSpacer size={'12px'} />
+        <Text lineHeight={'2.3rem'}>
+          この度はportrainy/月波にお問い合わせをいただきありがとうございます。
+          <br />
+          折り返しご連絡差し上げますまで暫くお待ちください。
+        </Text>
+        <OriginalSpacer size={'24px'} />
+        <Button text={'戻る'} isLangJp onClick={modalOpen} />
+      </Box>
+      <Copyright />
+    </>
   );
 };
 
