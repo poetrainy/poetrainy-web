@@ -70,7 +70,7 @@ const textStyles = {
   zIndexHeader: {
     zIndex: 10,
   },
-  zIndexClose: {
+  zIndexModal: {
     zIndex: 15,
   },
 };
