@@ -37,6 +37,7 @@ const Archive: NextPage<Props> = ({
     start: 0,
     end: 0,
   });
+  const [isWebModal, setIsWebModal] = useState<boolean>(false);
 
   const webTouchFunc = (e: TouchEvent<HTMLDivElement>, isStart?: boolean) => {
     if (!isSM) return;
@@ -68,6 +69,14 @@ const Archive: NextPage<Props> = ({
     setWebCount(i);
   };
 
+  const webModalDisplay = () => {
+    setIsWebModal(!isWebModal);
+  };
+
+  const webVisitSite = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   const Vtuber: () => JSX.Element = () => (
     <Center
       as={'ul'}
@@ -88,20 +97,19 @@ const Archive: NextPage<Props> = ({
             as={'img'}
             src={isSM ? `${item.image.url}?w=500` : `${item.image.url}?w=800`}
             alt={item.alt}
-            textStyle={'image'}
+            textStyle={'imageCover'}
           />
         </Box>
       ))}
     </Center>
   );
 
-  const modalOpen = () => {
-    console.log(webCount);
-  };
-
   return (
     <>
       <Header />
+      {/* 
+        DesignのGrid
+      */}
       <Grid
         as={'ul'}
         templateAreas={{
@@ -160,12 +168,15 @@ const Archive: NextPage<Props> = ({
                 isSM ? `${item.image.url}?w=800` : `${item.image.url}?w=1000`
               }
               alt={item.alt}
-              textStyle={'image'}
+              textStyle={'imageCover'}
             />
           </GridItem>
         ))}
       </Grid>
       {isSM && <OriginalSpacer size={'8vh'} />}
+      {/* 
+        Webのモックアップ
+      */}
       <>
         <Box
           w={'100vw'}
@@ -225,7 +236,7 @@ const Archive: NextPage<Props> = ({
             m={'16px 0 8vh'}
             p={'0 20vw'}
           >
-            <Button text={'View'} onClick={modalOpen} />
+            <Button text={'View'} onClick={webModalDisplay} />
             <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
               {microCMSWebData.map((item, i) => (
                 <Box as={'li'} key={item.id + 'web'}>
@@ -251,24 +262,40 @@ const Archive: NextPage<Props> = ({
           </Flex>
         )}
       </>
+      {/* 
+        VtuberのGrid
+      */}
       <Vtuber />
       <OriginalSpacer size={isSM ? '24px' : '48px'} />
+      {/* 
+        Copyright
+      */}
       <Copyright />
       <OriginalSpacer size={isSM ? '56px' : '120px'} />
+      {/* 
+        Modal
+      */}
       <Flex
         flexDir={'column'}
         justifyContent={'center'}
         alignItems={'center'}
-        w={'calc(100vw - 10vw)'}
-        h={'calc(80vh)'}
+        w={'92vw'}
+        h={'74vh'}
         bg={'white'}
         m={'auto'}
         p={'5vw'}
         boxShadow={'0 0 10px #00000030'}
         pos={'fixed'}
         inset={0}
+        opacity={0}
         zIndex={1}
+        pointerEvents={'none'}
+        transition={'opacity 0.2s'}
         sx={{
+          ...(isWebModal && {
+            opacity: 1,
+            pointerEvents: 'auto',
+          }),
           '&::before': {
             content: '""',
             display: 'block',
@@ -276,8 +303,9 @@ const Archive: NextPage<Props> = ({
             h: '100vh',
             bg: '#0000008c',
             pos: 'absolute',
-            inset: '-10vh auto auto -5vw',
+            inset: '-13vh auto auto -4vw',
             zIndex: -1,
+            pointerEvents: 'none',
           },
           '&::after': {
             content: '""',
@@ -295,8 +323,10 @@ const Archive: NextPage<Props> = ({
         <Box
           as={'ul'}
           w={'100%'}
-          h={'80%'}
+          h={'calc(100% - 5vw - 40px)'}
           pos={'relative'}
+          overflow={'scroll'}
+          pt={'8px'}
         >
           {microCMSWebData.map((item, i) => (
             <Center
@@ -317,9 +347,7 @@ const Archive: NextPage<Props> = ({
                   as={'img'}
                   src={item.image.url}
                   alt={item.title}
-                  w={'100%'}
-                  h={'100%'}
-                  objectFit={'contain'}
+                  textStyle={'imageContain'}
                 />
               </Box>
               <OriginalSpacer size={'20px'} />
@@ -342,9 +370,12 @@ const Archive: NextPage<Props> = ({
           justifyContent={'space-between'}
           w={'100%'}
           h={'40px'}
-          p={'0 10vw'}
+          p={'0 11vw'}
         >
-          <Button text={'Go site'} onClick={modalOpen} />
+          <Button
+            text={'Go site'}
+            onClick={() => webVisitSite(microCMSWebData[webCount].url)}
+          />
           <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
             {microCMSWebData.map((item, i) => (
               <Box as={'li'} key={item.title}>
@@ -368,6 +399,39 @@ const Archive: NextPage<Props> = ({
             ))}
           </Flex>
         </Flex>
+        <Center
+          as={'button'}
+          onClick={webModalDisplay}
+          onTouchStart={webModalDisplay}
+          w={'40px'}
+          h={'40px'}
+          pos={'absolute'}
+          inset={'calc(5vw + 8px) 5vw auto auto'}
+          opacity={1}
+          transition={'opacity 0.2s'}
+          textStyle={'zIndexClose'}
+          _hover={{
+            opacity: 0.6,
+          }}
+          sx={{
+            '&::before': {
+              content: '""',
+              display: 'block',
+              w: '1px',
+              h: '50px',
+              bg: 'black600',
+              transform: 'rotateZ(45deg)',
+            },
+            '&::after': {
+              content: '""',
+              display: 'block',
+              w: '1px',
+              h: '50px',
+              bg: 'black600',
+              transform: 'rotateZ(-45deg)',
+            },
+          }}
+        />
       </Flex>
     </>
   );
