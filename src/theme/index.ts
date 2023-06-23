@@ -57,13 +57,21 @@ const textStyles = {
     transform: 'scale(95%)',
     transition: 'opacity 0.3s, transform 0.3s',
   },
-  image: {
+  imageCover: {
     w: '100%',
     h: '100%',
     objectFit: 'cover',
   },
+  imageContain: {
+    w: '100%',
+    h: '100%',
+    objectFit: 'contain',
+  },
   zIndexHeader: {
     zIndex: 10,
+  },
+  zIndexClose: {
+    zIndex: 15,
   },
 };
 

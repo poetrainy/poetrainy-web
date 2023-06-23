@@ -12,12 +12,12 @@ const Button: FC<Props> = ({ text, isLangJp, onClick }) => (
     as={'button'}
     onClick={() => onClick()}
     alignItems={'center'}
-    minW={'96px'}
+    w={'104px'}
     h={'40px'}
     color={'white'}
     bg={'green'}
     fontFamily={'sp'}
-    p={'3px 40px 0 12px'}
+    p={'3px 0 0 12px'}
     transition={'opacity 0.2s'}
     opacity={1}
     _hover={{
