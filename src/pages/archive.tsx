@@ -288,9 +288,9 @@ const Archive: NextPage<Props> = ({
         pos={'fixed'}
         inset={0}
         opacity={0}
-        zIndex={1}
         pointerEvents={'none'}
         transition={'opacity 0.2s'}
+        textStyle={'zIndexModal'}
         sx={{
           ...(isWebModal && {
             opacity: 1,
@@ -409,7 +409,6 @@ const Archive: NextPage<Props> = ({
           inset={'calc(5vw + 8px) 5vw auto auto'}
           opacity={1}
           transition={'opacity 0.2s'}
-          textStyle={'zIndexClose'}
           _hover={{
             opacity: 0.6,
           }}
