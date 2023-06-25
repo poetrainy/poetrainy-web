@@ -1,29 +1,34 @@
 import { FC } from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex, transition } from '@chakra-ui/react';
+import { text } from 'stream/consumers';
 
 type Props = {
   text: string;
   isLangJp?: boolean;
+  isLarge?: boolean;
   onClick: () => void;
 };
 
-const Button: FC<Props> = ({ text, isLangJp, onClick }) => (
+const ButtonSmall: FC<Props> = ({ text, isLangJp, isLarge, onClick }) => (
   <Flex
     as={'button'}
     onClick={() => onClick()}
     alignItems={'center'}
-    w={'104px'}
+    w={isLarge ? '100%' : '104px'}
     h={'40px'}
     color={'white'}
     bg={'green'}
     fontFamily={'sp'}
-    p={'3px 0 0 12px'}
+    p={isLarge ? '3px 0 0' : '3px 0 0 12px'}
     transition={'opacity 0.2s'}
     opacity={1}
     _hover={{
       opacity: 0.7,
     }}
     sx={{
+      ...(isLarge && {
+        justifyContent: 'center',
+      }),
       ...(isLangJp
         ? {}
         : {
@@ -35,4 +40,4 @@ const Button: FC<Props> = ({ text, isLangJp, onClick }) => (
   </Flex>
 );
 
-export default Button;
+export default ButtonSmall;
