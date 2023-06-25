@@ -10,6 +10,9 @@ const colors = {
 };
 const styles = {
   global: {
+    '*': {
+      boxSizing: 'border-box',
+    },
     html: {
       fontSize: '62.5%',
     },
@@ -44,7 +47,7 @@ const fonts = {
 const breakpoints = {
   sm: '480px',
   md: '800px',
-  // lg: '820px',
+  lg: '1200px',
 };
 const textStyles = {
   transition: {

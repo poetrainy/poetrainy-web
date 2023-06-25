@@ -5,7 +5,7 @@ import { Box, Text } from '@chakra-ui/react';
 import Header from '@/components/Header';
 import OriginalSpacer from '@/components/OriginalSpacer';
 import Copyright from '@/components/Copyright';
-import Button from '@/components/Button';
+import ButtonSmall from '@/components/ButtonSmall';
 
 const ContactThanks: FC = () => {
   const router = useRouter();
@@ -29,7 +29,7 @@ const ContactThanks: FC = () => {
           折り返しご連絡差し上げますまで暫くお待ちください。
         </Text>
         <OriginalSpacer size={'24px'} />
-        <Button text={'戻る'} isLangJp onClick={modalOpen} />
+        <ButtonSmall text={'戻る'} isLangJp onClick={modalOpen} />
       </Box>
       <Copyright />
     </>

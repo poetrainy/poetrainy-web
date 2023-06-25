@@ -1,13 +1,15 @@
-import { TouchEvent, useState } from 'react';
+import { FC, TouchEvent, useState } from 'react';
 import type { NextPage } from 'next';
 import { Box, Center, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 import { client } from '@/libs/client';
 
 import Header from '@/components/Header';
 import Copyright from '@/components/Copyright';
-import Button from '@/components/Button';
+import ButtonSmall from '@/components/ButtonSmall';
 import OriginalSpacer from '@/components/OriginalSpacer';
+import Vtuber from '@/components/Vtuber';
 
 import {
   MICROCMS_DESIGN_TYPE_MAIN,
@@ -30,7 +32,7 @@ const Archive: NextPage<Props> = ({
   microCMSDesignData,
   microCMSVtuberData,
 }) => {
-  const { isSM } = useWindowSize();
+  const { isSM, isMD } = useWindowSize();
   const fadeIn = useFadeIn(microCMSDesignData.length, 70);
   const [webCount, setWebCount] = useState<number>(0);
   const [webTouchLocation, setWebTouchLocation] = useState({
@@ -69,40 +71,15 @@ const Archive: NextPage<Props> = ({
     setWebCount(i);
   };
 
-  const webModalDisplay = () => {
+  const webModalDisplay = (index?: number) => {
+    if (index && isSM) return;
+    if (index) setWebCount(index);
     setIsWebModal(!isWebModal);
   };
 
   const webVisitSite = (url: string) => {
     window.open(url, '_blank');
   };
-
-  const Vtuber: () => JSX.Element = () => (
-    <Center
-      as={'ul'}
-      flexWrap={'wrap'}
-      gap={{ base: '1vw', sm: '2%' }}
-      w={{ base: '100vw', sm: '65vw' }}
-      h={{ base: 'calc(100vw - 6vw)', sm: '65vw' }}
-      m={'auto'}
-      p={{ base: '0 2vw', sm: 0 }}
-    >
-      {microCMSVtuberData.map((item: MicroCMSDesignType) => (
-        <Box
-          as={'li'}
-          key={item.id}
-          w={{ base: 'calc((100vw - 1vw * 2 - 2vw * 2 ) / 3)', sm: '32%' }}
-        >
-          <Box
-            as={'img'}
-            src={isSM ? `${item.image.url}?w=500` : `${item.image.url}?w=800`}
-            alt={item.alt}
-            textStyle={'imageCover'}
-          />
-        </Box>
-      ))}
-    </Center>
-  );
 
   return (
     <>
@@ -119,20 +96,27 @@ const Archive: NextPage<Props> = ({
                 "seijun utakata utakata utakata"
                 "web-study utakata utakata utakata"
                 "jishatecho jishatecho yoshio yoshio"`,
-          sm: `"tsukinami tsukinami seijun wd3"
+          md: `"tsukinami tsukinami seijun wd3"
                 "tsukinami tsukinami seijun yoshio"
                 "tsukinami tsukinami requested-namecard yoshio"
                 "osaketate utakata requested-namecard yoshio"
                 "osaketate utakata web-study web-study"
                 "jishatecho utakata web-study web-study"`,
+          lg: `"tsukinami tsukinami seijun web-study web-study"
+                "tsukinami tsukinami seijun yoshio utakata"
+                "tsukinami tsukinami wd3 yoshio utakata"
+                "jishatecho requested-namecard requested-namecard yoshio utakata"
+                "jishatecho requested-namecard requested-namecard osaketate utakata"`,
         }}
         gridTemplateColumns={{
           base: '40vw 20vw 5vw 35vw',
-          sm: '25vw 30vw 20vw 25vw',
+          md: '25vw 30vw 20vw 25vw',
+          lg: '25vw 20vw 16vw 14vw 25vw',
         }}
         gridTemplateRows={{
           base: '35vw calc(35vw / 2) 25vw 30vw 50vw 55vw',
-          sm: 'calc(25vw / 3 * 2) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 2)',
+          md: 'calc(25vw / 3 * 2) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 3) calc(25vw / 3 * 4 / 2)',
+          lg: '20vw 2vw 12vw 7vw 14vw',
         }}
       >
         {microCMSDesignData.map((item: MicroCMSDesignType, i: number) => (
@@ -177,58 +161,66 @@ const Archive: NextPage<Props> = ({
       {/* 
         Webのモックアップ
       */}
-      <>
-        <Box
-          w={'100vw'}
-          overflow={'hidden'}
-          onTouchStart={(e) => webTouchFunc(e, true)}
-          onTouchEnd={(e) => webTouchFunc(e)}
+      <Box
+        w={'100vw'}
+        overflow={'hidden'}
+        onTouchStart={(e) => webTouchFunc(e, true)}
+        onTouchEnd={(e) => webTouchFunc(e)}
+      >
+        <Flex
+          as={'ul'}
+          gap={{ base: '15vw', sm: '48px' }}
+          alignItems={'center'}
+          w={'fit-content'}
+          h={{ md: '120vh' }}
+          maxH={{ md: '880px' }}
+          m={{ sm: 'auto' }}
+          p={{ sm: '0 64px' }}
+          transform={{
+            base: `translateX(calc(20vw - 75vw * ${webCount}))`,
+            sm: 'none',
+          }}
+          transition={'transform 0.3s'}
         >
-          <Flex
-            as={'ul'}
-            gap={{ base: '15vw', sm: '48px' }}
-            alignItems={'center'}
-            w={'fit-content'}
-            h={{ md: '120vh' }}
-            maxH={{ md: '880px' }}
-            m={{ sm: 'auto' }}
-            p={{ sm: '0 64px' }}
-            transform={{
-              base: `translateX(calc(20vw - 75vw * ${webCount}))`,
-              sm: 'none',
-            }}
-            transition={'transform 0.3s'}
-          >
-            {microCMSWebData.map((item, i) => (
-              <Flex
-                as={'li'}
-                key={item.id}
-                flexDir={'column'}
-                gap={'24px'}
-                w={{ base: '60vw', sm: '20vw' }}
-                maxW={{ sm: '240px' }}
-                minW={{ sm: '200px' }}
-              >
-                <Box as={'img'} src={item.image.url} alt={item.title} />
-                <Box>
-                  <Text color={'black600'} fontSize={'1.2rem'}>
-                    {item.copy}
-                  </Text>
-                  <OriginalSpacer size={'2px'} />
-                  <Flex
-                    alignItems={'flex-start'}
-                    h={'64px'}
-                    fontWeight={'bold'}
-                    fontSize={'2.2rem'}
-                    letterSpacing={0.1}
-                  >
-                    {item.title}
-                  </Flex>
-                </Box>
-              </Flex>
-            ))}
-          </Flex>
-        </Box>
+          {microCMSWebData.map((item: MicroCMSWebType, i: number) => (
+            <Flex
+              as={'li'}
+              key={item.id}
+              flexDir={'column'}
+              gap={'24px'}
+              w={{ base: '60vw', sm: '20vw' }}
+              maxW={{ sm: '240px' }}
+              minW={{ sm: '200px' }}
+              opacity={1}
+              transition={'opacity 0.2s'}
+              sx={{
+                ...(!isSM && {
+                  '&:hover': {
+                    opacity: 0.6,
+                  },
+                }),
+              }}
+              onClick={() => webModalDisplay(i)}
+            >
+              <Box as={'img'} src={item.image.url} alt={item.title} />
+              <Box>
+                <Text color={'black600'} fontSize={'1.2rem'}>
+                  {item.copy}
+                </Text>
+                <OriginalSpacer size={'2px'} />
+                <Flex
+                  alignItems={'flex-start'}
+                  h={'64px'}
+                  fontWeight={'bold'}
+                  fontSize={'2.2rem'}
+                  letterSpacing={0.1}
+                >
+                  {item.title}
+                </Flex>
+              </Box>
+            </Flex>
+          ))}
+        </Flex>
         {isSM && (
           <Flex
             justifyContent={'space-between'}
@@ -236,7 +228,7 @@ const Archive: NextPage<Props> = ({
             m={'16px 0 8vh'}
             p={'0 20vw'}
           >
-            <Button text={'View'} onClick={webModalDisplay} />
+            <ButtonSmall text={'View'} onClick={webModalDisplay} />
             <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
               {microCMSWebData.map((item, i) => (
                 <Box as={'li'} key={item.id + 'web'}>
@@ -261,11 +253,11 @@ const Archive: NextPage<Props> = ({
             </Flex>
           </Flex>
         )}
-      </>
+      </Box>
       {/* 
         VtuberのGrid
       */}
-      <Vtuber />
+      <Vtuber data={microCMSVtuberData} />
       <OriginalSpacer size={isSM ? '24px' : '48px'} />
       {/* 
         Copyright
@@ -279,17 +271,17 @@ const Archive: NextPage<Props> = ({
         flexDir={'column'}
         justifyContent={'center'}
         alignItems={'center'}
-        w={'92vw'}
-        h={'74vh'}
+        w={{ base: '92vw', md: '70vw' }}
+        h={{ base: '74vh', md: '90vh' }}
         bg={'white'}
         m={'auto'}
-        p={'5vw'}
+        p={{ base: '5vw', md: '40px' }}
         boxShadow={'0 0 10px #00000030'}
         pos={'fixed'}
         inset={0}
         opacity={0}
         pointerEvents={'none'}
-        transition={'opacity 0.2s'}
+        transition={'opacity 0.1s'}
         textStyle={'zIndexModal'}
         sx={{
           ...(isWebModal && {
@@ -303,9 +295,15 @@ const Archive: NextPage<Props> = ({
             h: '100vh',
             bg: '#0000008c',
             pos: 'absolute',
-            inset: '-13vh auto auto -4vw',
             zIndex: -1,
             pointerEvents: 'none',
+            ...(isSM
+              ? {
+                  inset: '-13vh auto auto -4vw',
+                }
+              : {
+                  inset: '-5vh auto auto -15vw',
+                }),
           },
           '&::after': {
             content: '""',
@@ -323,16 +321,21 @@ const Archive: NextPage<Props> = ({
         <Box
           as={'ul'}
           w={'100%'}
-          h={'calc(100% - 5vw - 40px)'}
+          h={{
+            base: 'calc(100% - 5vw - 40px)',
+            md: '80%',
+          }}
           pos={'relative'}
-          overflow={'scroll'}
-          pt={'8px'}
+          overflow={{ base: 'scroll', md: 'visible' }}
+          pt={{ base: '8px', md: '0' }}
         >
           {microCMSWebData.map((item, i) => (
             <Center
-              flexDir={'column'}
-              as={'li'}
               key={item.id + 'modal'}
+              flexDir={{ base: 'column', md: 'row' }}
+              gap={{ base: '20px', md: '5%' }}
+              as={'li'}
+              h={'100%'}
               opacity={0}
               transition={'opacity 0.2s'}
               pos={'absolute'}
@@ -342,7 +345,11 @@ const Archive: NextPage<Props> = ({
                 }),
               }}
             >
-              <Box h={'40vh'} zIndex={1}>
+              <Box
+                w={{ md: '40%' }}
+                h={{ base: '40vh', md: '100%' }}
+                zIndex={1}
+              >
                 <Box
                   as={'img'}
                   src={item.image.url}
@@ -350,59 +357,49 @@ const Archive: NextPage<Props> = ({
                   textStyle={'imageContain'}
                 />
               </Box>
-              <OriginalSpacer size={'20px'} />
-              <Text color={'black600'} fontSize={'1.2rem'}>
-                {item.copy}
-              </Text>
-              <OriginalSpacer size={'2px'} />
-              <Text fontWeight={'bold'} fontSize={'2rem'}>
-                {item.title}
-              </Text>
-              <OriginalSpacer size={'12px'} />
-              <Text h={'calc(1.8rem * 4)'} fontSize={'1.2rem'}>
-                {item.description}
-              </Text>
+              <Box w={{ md: '55%' }} h={'100%'} pt={{ md: '40px' }}>
+                <Text
+                  color={'black600'}
+                  fontSize={{ base: '1.2rem', md: '1.3rem' }}
+                >
+                  {item.copy}
+                </Text>
+                <OriginalSpacer size={'2px'} />
+                <Text
+                  fontWeight={'bold'}
+                  fontSize={{ base: '2rem', md: '2.5rem' }}
+                >
+                  {item.title}
+                </Text>
+                <OriginalSpacer size={'12px'} />
+                <Text
+                  h={'calc(1.8rem * 4)'}
+                  fontSize={{ base: '1.2rem', md: '1.3rem' }}
+                  lineHeight={{ md: '2.2rem' }}
+                >
+                  {item.description}
+                </Text>
+              </Box>
             </Center>
           ))}
         </Box>
-        <OriginalSpacer size={'20px'} />
-        <Flex
-          justifyContent={'space-between'}
-          w={'100%'}
-          h={'40px'}
-          p={'0 11vw'}
+        {isMD && <OriginalSpacer size={'20px'} />}
+        <Box
+          w={{ base: '100%', md: 'calc((100% - ( 40px * 2 )) * 0.55)' }}
+          p={{ base: '0 11vw', md: '0' }}
+          pos={{ base: 'static', md: 'absolute' }}
+          inset={{ base: 'auto', md: 'auto 40px calc(40px + 10%) auto' }}
         >
-          <Button
+          <ButtonSmall
             text={'Go site'}
+            isLarge
             onClick={() => webVisitSite(microCMSWebData[webCount].url)}
           />
-          <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
-            {microCMSWebData.map((item, i) => (
-              <Box as={'li'} key={item.title}>
-                <Box
-                  as={'button'}
-                  w={'4px'}
-                  h={'40px'}
-                  bg={'black300'}
-                  transition={'background 0.2s'}
-                  _hover={{
-                    cursor: 'pointer',
-                  }}
-                  sx={{
-                    ...(i === webCount && {
-                      bg: 'green',
-                    }),
-                  }}
-                  onClick={() => webPagerClick(i)}
-                />
-              </Box>
-            ))}
-          </Flex>
-        </Flex>
+        </Box>
         <Center
           as={'button'}
-          onClick={webModalDisplay}
-          onTouchStart={webModalDisplay}
+          onClick={() => webModalDisplay()}
+          onTouchStart={() => webModalDisplay()}
           w={'40px'}
           h={'40px'}
           pos={'absolute'}
