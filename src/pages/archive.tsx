@@ -164,14 +164,14 @@ const Archive: NextPage<Props> = ({
           </GridItem>
         ))}
       </Grid>
-      {/* {isSM && <OriginalSpacer size={'8vh'} />} */}
       {/* 
         Webのモックアップ
       */}
       <Box
         w={'100vw'}
-        minH={'90vh'}
-        // p={'64px 0'}
+        minH={{ base: '100vh', md: '90vh' }}
+        m={'auto'}
+        p={{ base: '64px 0', md: 0 }}
         overflow={'hidden'}
         onTouchStart={(e) => webTouchFunc(e, true)}
         onTouchEnd={(e) => webTouchFunc(e)}
@@ -300,7 +300,7 @@ const Archive: NextPage<Props> = ({
         VtuberのGrid
       */}
       <Vtuber data={microCMSVtuberData} />
-      <OriginalSpacer size={'20vh'} />
+      <OriginalSpacer size={'15vh'} />
       {/* 
         Contact
       */}
@@ -308,12 +308,14 @@ const Archive: NextPage<Props> = ({
         <Text w={'fit-content'} m={{ base: '0 auto 16px', md: '0 auto 24px' }}>
           お問い合わせいただけると幸いです！
         </Text>
-        <Button text={'Contact to me'} onClick={contactTransition} isLarge />
+        <Box w={'80%'} m={'auto'}>
+          <Button text={'Contact to me'} onClick={contactTransition} isLarge />
+        </Box>
       </>
       {/* 
         Copyright
       */}
-      <OriginalSpacer size={'20vh'} />
+      <OriginalSpacer size={'15vh'} />
       <Copyright />
       <OriginalSpacer size={isSM ? '56px' : '120px'} />
       {/* 
@@ -342,34 +344,34 @@ const Archive: NextPage<Props> = ({
             opacity: 1,
             pointerEvents: 'auto',
           }),
-          '&::before': {
-            content: '""',
-            display: 'block',
-            w: '150vw',
-            h: '150vh',
-            bg: '#0000008c',
-            pos: 'absolute',
-            zIndex: -1,
-            pointerEvents: 'none',
-            ...(isSM
-              ? {
-                  inset: '-13vh auto auto -4vw',
-                }
-              : {
-                  inset: '-20vh auto auto -30vw',
-                }),
-          },
-          '&::after': {
-            content: '""',
-            display: 'block',
-            w: '100%',
-            h: '100%',
-            bg: 'white',
-            pos: 'absolute',
-            inset: 0,
-            zIndex: -1,
-            pointerEvents: 'none',
-          },
+          // '&::before': {
+          //   content: '""',
+          //   display: 'block',
+          //   w: '150vw',
+          //   h: '150vh',
+          //   bg: '#0000008c',
+          //   pos: 'absolute',
+          //   zIndex: -1,
+          //   pointerEvents: 'none',
+          //   ...(isSM
+          //     ? {
+          //         inset: '-13vh auto auto -4vw',
+          //       }
+          //     : {
+          //         inset: '-20vh auto auto -30vw',
+          //       }),
+          // },
+          // '&::after': {
+          //   content: '""',
+          //   display: 'block',
+          //   w: '100%',
+          //   h: '100%',
+          //   bg: 'white',
+          //   pos: 'absolute',
+          //   inset: 0,
+          //   zIndex: -1,
+          //   pointerEvents: 'none',
+          // },
         }}
       >
         <Box
@@ -487,6 +489,22 @@ const Archive: NextPage<Props> = ({
           }}
         />
       </Flex>
+      <Box
+        onClick={() => webModalDisplay()}
+        onTouchStart={() => webModalDisplay()}
+        bg={'#0000008c'}
+        pos={'fixed'}
+        inset={0}
+        opacity={0}
+        pointerEvents={'none'}
+        transition={'opacity 0.1s'}
+        sx={{
+          ...(isWebModal && {
+            opacity: 1,
+            pointerEvents: 'auto',
+          }),
+        }}
+      />
     </>
   );
 };

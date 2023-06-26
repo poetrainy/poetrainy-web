@@ -14,7 +14,7 @@ const ButtonSmall: FC<Props> = ({ text, isLangJp, isLarge, onClick }) => (
     as={'button'}
     onClick={() => onClick()}
     alignItems={'center'}
-    w={isLarge ? '80%' : '104px'}
+    w={isLarge ? '100%' : '104px'}
     h={isLarge ? '72px' : '40px'}
     color={'white'}
     bg={'green'}
@@ -28,7 +28,6 @@ const ButtonSmall: FC<Props> = ({ text, isLangJp, isLarge, onClick }) => (
     }}
     sx={{
       ...(isLarge && {
-        // justifyContent: 'center',
         pl: '5%',
         maxW: '600px',
         m: 'auto',
