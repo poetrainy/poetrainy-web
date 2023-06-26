@@ -19,7 +19,7 @@ const HeadOgp: FC<Props> = ({ data }) => (
     />
     <meta
       property={'og:url'}
-      content={`${SITE_URL}${data ? `/${data.url}` : ''}`}
+      content={`${SITE_URL}${data ? `${data.url}` : ''}`}
     />
     <meta
       property={'og:description'}
