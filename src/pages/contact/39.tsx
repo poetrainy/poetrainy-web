@@ -15,7 +15,7 @@ const Contact39: FC = () => {
   };
 
   return (
-    <>
+    <Box as={'main'}>
       <Header />
       <OriginalSpacer size={`${144 + 40}px`} />
       <Box w={'80vw'} maxW={'1000px'} m={'auto'}>
@@ -33,7 +33,7 @@ const Contact39: FC = () => {
       </Box>
       <OriginalSpacer size={'40px'} />
       <Copyright />
-    </>
+    </Box>
   );
 };
 

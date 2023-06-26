@@ -27,24 +27,28 @@ const ButtonSmall: FC<Props> = ({ text, isLangJp, isLarge, onClick }) => (
       opacity: 0.7,
     }}
     sx={{
-      ...(isLarge && {
-        pl: '5%',
-        maxW: '600px',
-        m: 'auto',
-        fontSize: '2rem',
-        '&::before': {
-          content: '""',
-          display: 'block',
-          w: '80px',
-          h: '24px',
-          bg: 'url("/img/bunner-arrow.svg") no-repeat',
-          bgSize: 'contain',
-          bgPosition: 'center',
-          opacity: 0.7,
-          pos: 'absolute',
-          inset: 'auto 10% auto auto',
-        },
-      }),
+      ...(isLarge
+        ? {
+            pl: '5%',
+            maxW: '600px',
+            m: 'auto',
+            fontSize: '2rem',
+            '&::before': {
+              content: '""',
+              display: 'block',
+              w: '80px',
+              h: '24px',
+              bg: 'url("/img/bunner-arrow.svg") no-repeat',
+              bgSize: 'contain',
+              bgPosition: 'center',
+              opacity: 0.7,
+              pos: 'absolute',
+              inset: 'auto 10% auto auto',
+            },
+          }
+        : {
+            fontSize: '1.6rem',
+          }),
     }}
   >
     {text}

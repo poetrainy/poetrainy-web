@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 
 const animationKeyframes = keyframes`
   0% { transform: scale(100%); }
-  35% { transform: scale(100%); }
+  40% { transform: scale(100%); }
   50% { transform: scale(120%); }
-  70% { transform: scale(120%); opacity: 1; }
+  75% { transform: scale(120%); opacity: 1; }
   100% { transform: scale(80%); opacity: 0; }
 `;
 
@@ -16,7 +16,7 @@ const animationKeyframesKeep = keyframes`
 `;
 
 const animationKeep = `${animationKeyframesKeep} 0`;
-const animation = `${animationKeyframes} 1.1s ease-in-out`;
+const animation = `${animationKeyframes} 1s ease-in-out`;
 
 type Props = {
   isClick: boolean;
