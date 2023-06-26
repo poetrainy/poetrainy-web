@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 
 const animationKeyframes = keyframes`
   0% { transform: scale(100%); }
-  40% { transform: scale(100%); }
-  50% { transform: scale(120%); }
-  75% { transform: scale(120%); opacity: 1; }
+  30% { transform: scale(100%); }
+  45% { transform: scale(120%); }
+  70% { transform: scale(120%); opacity: 1; }
+  88% { transform: scale(80%); opacity: 0; }
   100% { transform: scale(80%); opacity: 0; }
 `;
 
@@ -32,7 +33,7 @@ const Icon: FC<Props> = ({ isClick, onClick }) => {
     setTimeout(() => {
       setIsOpacity(true);
       router.push('/archive');
-    }, 1000);
+    }, 900);
   }, [isClick]);
 
   return (

@@ -1,15 +1,13 @@
 import { FC } from 'react';
-import { Flex, transition } from '@chakra-ui/react';
-import { text } from 'stream/consumers';
+import { Flex } from '@chakra-ui/react';
 
 type Props = {
   text: string;
-  isLangJp?: boolean;
   isLarge?: boolean;
   onClick: () => void;
 };
 
-const ButtonSmall: FC<Props> = ({ text, isLangJp, isLarge, onClick }) => (
+const ButtonSmall: FC<Props> = ({ text, isLarge, onClick }) => (
   <Flex
     as={'button'}
     onClick={() => onClick()}

@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import { Box, Center, Flex, Text, keyframes } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-import Copyright from '@/components/Copyright';
-import Blob from '@/components/Home/Blob';
+import HeadOgp from '@/components/HeadOgp';
 import Icon from '@/components/Home/Icon';
+import Blob from '@/components/Home/Blob';
 import Description from '@/components/Home/Description';
+import Copyright from '@/components/Copyright';
 
 import { NAME } from '@/constants/common';
 import { LINKS, LINK_PHOTO, LINK_WEB } from '@/constants/link';
@@ -83,6 +84,7 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <HeadOgp />
       {isMD ? (
         <Center as={'main'} minH={'105vh'} p={'40px 0'}>
           <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
