@@ -16,6 +16,7 @@ import { LinksHeadlineType, LinksType } from '@/types/link';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { useFadeIn } from '@/hooks/useFadeIn';
+import OriginalSpacer from '@/components/OriginalSpacer';
 
 const animationKeyframes = keyframes`
   0% { transform: translateY(0); }
@@ -159,6 +160,7 @@ const Home: NextPage = () => {
               <Name />
               <Description />
             </Flex>
+            <OriginalSpacer size={'2px'} />
             <Box
               textStyle={'transition'}
               sx={{
