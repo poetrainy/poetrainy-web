@@ -171,7 +171,7 @@ const Archive: NextPage<Props> = ({
       <Box
         w={'100vw'}
         minH={'90vh'}
-        p={'64px 0'}
+        // p={'64px 0'}
         overflow={'hidden'}
         onTouchStart={(e) => webTouchFunc(e, true)}
         onTouchEnd={(e) => webTouchFunc(e)}

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { NextPage } from 'next';
 import { motion } from 'framer-motion';
 import { Box, Center, Flex, Text, keyframes } from '@chakra-ui/react';
@@ -30,7 +30,12 @@ const animation = `${animationKeyframes} 2.5s 2.8s ease-in-out infinite`;
 
 const Home: NextPage = () => {
   const { isMD } = useWindowSize();
+  const [isClick, setIsClick] = useState<boolean>(false);
   const fadeIn = useFadeIn(5, 300);
+
+  const getClickEvent = () => {
+    setIsClick(true);
+  };
 
   const Links: FC<{
     contents: LinksType[LinksHeadlineType];
@@ -78,7 +83,7 @@ const Home: NextPage = () => {
   return (
     <>
       {isMD ? (
-        <Center minH={'105vh'}>
+        <Center minH={'105vh'} p={'40px 0'}>
           <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
             <Box
               as={motion.div}
@@ -90,6 +95,9 @@ const Home: NextPage = () => {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
+                ...(isClick && {
+                  opacity: 0,
+                }),
               }}
             >
               <Blob />
@@ -100,6 +108,9 @@ const Home: NextPage = () => {
                 ...(fadeIn[1] && {
                   opacity: 1,
                   transform: 'translateY(0)',
+                }),
+                ...(isClick && {
+                  opacity: 0,
                 }),
               }}
             >
@@ -114,7 +125,7 @@ const Home: NextPage = () => {
                 }),
               }}
             >
-              <Icon />
+              <Icon isClick={isClick} onClick={getClickEvent} />
             </Box>
             <Box
               textStyle={'transition'}
@@ -122,6 +133,9 @@ const Home: NextPage = () => {
                 ...(fadeIn[2] && {
                   opacity: 1,
                   transform: 'translateY(0)',
+                }),
+                ...(isClick && {
+                  opacity: 0,
                 }),
               }}
             >
@@ -137,6 +151,9 @@ const Home: NextPage = () => {
                   opacity: 1,
                   transform: 'translateY(0)',
                 }),
+                ...(isClick && {
+                  opacity: 0,
+                }),
               }}
             >
               <Name />
@@ -148,6 +165,9 @@ const Home: NextPage = () => {
                 ...(fadeIn[4] && {
                   opacity: 1,
                   transform: 'translateY(0)',
+                }),
+                ...(isClick && {
+                  opacity: 0,
                 }),
               }}
             >
@@ -170,6 +190,9 @@ const Home: NextPage = () => {
                     opacity: 1,
                     transform: 'translateY(0)',
                   }),
+                  ...(isClick && {
+                    opacity: 0,
+                  }),
                 }}
               >
                 <Blob />
@@ -183,7 +206,7 @@ const Home: NextPage = () => {
                   }),
                 }}
               >
-                <Icon />
+                <Icon isClick={isClick} onClick={getClickEvent} />
               </Box>
             </Box>
             <Flex flexDir={'column'} gap={'32px'}>
@@ -193,6 +216,9 @@ const Home: NextPage = () => {
                   ...(fadeIn[1] && {
                     opacity: 1,
                     transform: 'translateY(0)',
+                  }),
+                  ...(isClick && {
+                    opacity: 0,
                   }),
                 }}
               >
@@ -207,6 +233,9 @@ const Home: NextPage = () => {
                     opacity: 1,
                     transform: 'translateY(0)',
                   }),
+                  ...(isClick && {
+                    opacity: 0,
+                  }),
                 }}
               >
                 <Links contents={LINKS[LINK_WEB]} />
@@ -220,6 +249,9 @@ const Home: NextPage = () => {
               ...(fadeIn[4] && {
                 opacity: 1,
                 transform: 'translateY(0)',
+              }),
+              ...(isClick && {
+                opacity: 0,
               }),
             }}
           >
