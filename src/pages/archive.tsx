@@ -1,13 +1,13 @@
-import { FC, TouchEvent, useState } from 'react';
+import { TouchEvent, useState } from 'react';
 import type { NextPage } from 'next';
 import { Box, Center, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 import { client } from '@/libs/client';
 
 import Header from '@/components/Header';
 import Copyright from '@/components/Copyright';
-import ButtonSmall from '@/components/ButtonSmall';
+import Button from '@/components/ButtonSmall';
 import OriginalSpacer from '@/components/OriginalSpacer';
 import Vtuber from '@/components/Vtuber';
 
@@ -20,6 +20,8 @@ import { MicroCMSDesignType, MicroCMSWebType } from '@/types/microCMS';
 
 import { useFadeIn } from '@/hooks/useFadeIn';
 import { useWindowSize } from '@/hooks/useWindowSize';
+import { SKILLS, SKILL_MAIN } from '@/constants/skill';
+import { SkillsContentsType } from '@/types/skill';
 
 type Props = {
   microCMSWebData: MicroCMSWebType[];
@@ -32,6 +34,7 @@ const Archive: NextPage<Props> = ({
   microCMSDesignData,
   microCMSVtuberData,
 }) => {
+  const router = useRouter();
   const { isSM, isMD } = useWindowSize();
   const fadeIn = useFadeIn(microCMSDesignData.length, 70);
   const [webCount, setWebCount] = useState<number>(0);
@@ -79,6 +82,10 @@ const Archive: NextPage<Props> = ({
 
   const webVisitSite = (url: string) => {
     window.open(url, '_blank');
+  };
+
+  const contactTransition = () => {
+    router.push('/contact');
   };
 
   return (
@@ -157,12 +164,14 @@ const Archive: NextPage<Props> = ({
           </GridItem>
         ))}
       </Grid>
-      {isSM && <OriginalSpacer size={'8vh'} />}
+      {/* {isSM && <OriginalSpacer size={'8vh'} />} */}
       {/* 
         Webのモックアップ
       */}
       <Box
         w={'100vw'}
+        minH={'90vh'}
+        p={'64px 0'}
         overflow={'hidden'}
         onTouchStart={(e) => webTouchFunc(e, true)}
         onTouchEnd={(e) => webTouchFunc(e)}
@@ -225,10 +234,10 @@ const Archive: NextPage<Props> = ({
           <Flex
             justifyContent={'space-between'}
             h={'40px'}
-            m={'16px 0 8vh'}
+            m={'16px 0 0'}
             p={'0 20vw'}
           >
-            <ButtonSmall text={'View'} onClick={webModalDisplay} />
+            <Button text={'View'} onClick={webModalDisplay} />
             <Flex as={'ul'} gap={'8px'} justifyContent={'flex-end'}>
               {microCMSWebData.map((item, i) => (
                 <Box as={'li'} key={item.id + 'web'}>
@@ -255,13 +264,56 @@ const Archive: NextPage<Props> = ({
         )}
       </Box>
       {/* 
+        Skill
+      */}
+      {/* <Center as={'ul'} gap={'2.5%'} flexWrap={'wrap'} w={'70vw'} m={'auto'}>
+        {SKILLS[SKILL_MAIN].map((item: SkillsContentsType, i: number) => (
+          <Center
+            as={'li'}
+            key={item.icon}
+            w={'18%'}
+            pt={'18%'}
+            pos={'relative'}
+            borderRadius={'9999px'}
+          >
+            <Center
+              w={'75%'}
+              h={'75%'}
+              pos={'absolute'}
+              m={'auto'}
+              inset={0}
+              boxShadow={'0 0 10px #00000030'}
+              borderRadius={'9999px'}
+            >
+              <Box
+                as={'img'}
+                src={`/img/${item.icon}.svg`}
+                w={'40%'}
+                h={'40%'}
+                objectFit={'contain'}
+              />
+            </Center>
+          </Center>
+        ))}
+      </Center> */}
+      {/* 
         VtuberのGrid
       */}
       <Vtuber data={microCMSVtuberData} />
-      <OriginalSpacer size={isSM ? '24px' : '48px'} />
+      <OriginalSpacer size={'20vh'} />
+      {/* 
+        Contact
+      */}
+      <>
+        <Text w={'fit-content'} m={{ base: '0 auto 16px', md: '0 auto 24px' }}>
+          お問い合わせいただけると幸いです！
+        </Text>
+        <Button text={'Contact to me'} onClick={contactTransition} isLarge />
+      </>
       {/* 
         Copyright
       */}
+      <OriginalSpacer size={'20vh'} />
       <Copyright />
       <OriginalSpacer size={isSM ? '56px' : '120px'} />
       {/* 
@@ -273,6 +325,8 @@ const Archive: NextPage<Props> = ({
         alignItems={'center'}
         w={{ base: '92vw', md: '70vw' }}
         h={{ base: '74vh', md: '90vh' }}
+        maxW={'880px'}
+        maxH={'640px'}
         bg={'white'}
         m={'auto'}
         p={{ base: '5vw', md: '40px' }}
@@ -291,8 +345,8 @@ const Archive: NextPage<Props> = ({
           '&::before': {
             content: '""',
             display: 'block',
-            w: '100vw',
-            h: '100vh',
+            w: '150vw',
+            h: '150vh',
             bg: '#0000008c',
             pos: 'absolute',
             zIndex: -1,
@@ -302,7 +356,7 @@ const Archive: NextPage<Props> = ({
                   inset: '-13vh auto auto -4vw',
                 }
               : {
-                  inset: '-5vh auto auto -15vw',
+                  inset: '-20vh auto auto -30vw',
                 }),
           },
           '&::after': {
@@ -349,11 +403,15 @@ const Archive: NextPage<Props> = ({
                 w={{ md: '40%' }}
                 h={{ base: '40vh', md: '100%' }}
                 zIndex={1}
+                pos={'relative'}
               >
                 <Box
                   as={'img'}
                   src={item.image.url}
                   alt={item.title}
+                  pos={{ md: 'absolute' }}
+                  inset={0}
+                  m={'auto'}
                   textStyle={'imageContain'}
                 />
               </Box>
@@ -390,7 +448,7 @@ const Archive: NextPage<Props> = ({
           pos={{ base: 'static', md: 'absolute' }}
           inset={{ base: 'auto', md: 'auto 40px calc(40px + 10%) auto' }}
         >
-          <ButtonSmall
+          <Button
             text={'Go site'}
             isLarge
             onClick={() => webVisitSite(microCMSWebData[webCount].url)}

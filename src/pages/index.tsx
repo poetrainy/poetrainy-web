@@ -10,7 +10,7 @@ import Icon from '@/components/Home/Icon';
 import Description from '@/components/Home/Description';
 
 import { NAME } from '@/constants/common';
-import { LINK, LINK_PHOTO, LINK_WEB } from '@/constants/link';
+import { LINKS, LINK_PHOTO, LINK_WEB } from '@/constants/link';
 
 import { LinksHeadlineType, LinksType } from '@/types/link';
 
@@ -103,7 +103,7 @@ const Home: NextPage = () => {
                 }),
               }}
             >
-              <Links contents={LINK[LINK_WEB]} />
+              <Links contents={LINKS[LINK_WEB]} />
             </Box>
             <Box
               textStyle={'transition'}
@@ -125,7 +125,7 @@ const Home: NextPage = () => {
                 }),
               }}
             >
-              <Links contents={LINK[LINK_PHOTO]} />
+              <Links contents={LINKS[LINK_PHOTO]} />
             </Box>
             <Flex
               flexDir={'column'}
@@ -209,8 +209,8 @@ const Home: NextPage = () => {
                   }),
                 }}
               >
-                <Links contents={LINK[LINK_WEB]} />
-                <Links contents={LINK[LINK_PHOTO]} />
+                <Links contents={LINKS[LINK_WEB]} />
+                <Links contents={LINKS[LINK_PHOTO]} />
               </Flex>
             </Flex>
           </Center>

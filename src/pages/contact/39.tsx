@@ -7,7 +7,7 @@ import OriginalSpacer from '@/components/OriginalSpacer';
 import Copyright from '@/components/Copyright';
 import ButtonSmall from '@/components/ButtonSmall';
 
-const ContactThanks: FC = () => {
+const Contact39: FC = () => {
   const router = useRouter();
 
   const modalOpen = () => {
@@ -36,4 +36,4 @@ const ContactThanks: FC = () => {
   );
 };
 
-export default ContactThanks;
+export default Contact39;
