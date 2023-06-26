@@ -31,6 +31,7 @@ const Contact39: FC = () => {
         <OriginalSpacer size={'24px'} />
         <ButtonSmall text={'戻る'} isLangJp onClick={modalOpen} />
       </Box>
+      <OriginalSpacer size={'40px'} />
       <Copyright />
     </>
   );
