@@ -89,7 +89,7 @@ const Archive: NextPage<Props> = ({
   };
 
   return (
-    <>
+    <Box as={"main"}>
       <Header />
       {/* 
         DesignのGrid
@@ -505,7 +505,7 @@ const Archive: NextPage<Props> = ({
           }),
         }}
       />
-    </>
+    </Box>
   );
 };
 

@@ -84,7 +84,7 @@ const Home: NextPage = () => {
   return (
     <>
       {isMD ? (
-        <Center minH={'105vh'} p={'40px 0'}>
+        <Center as={'main'} minH={'105vh'} p={'40px 0'}>
           <Center flexDir={'column'} gap={'12px'} w={'fit-content'} m={'auto'}>
             <Box
               as={motion.div}
@@ -178,7 +178,13 @@ const Home: NextPage = () => {
           </Center>
         </Center>
       ) : (
-        <Center flexDir={'column'} gap={'16px'} minH={'100vh'} pt={'48px'}>
+        <Center
+          as={'main'}
+          flexDir={'column'}
+          gap={'16px'}
+          minH={'100vh'}
+          pt={'48px'}
+        >
           <Center alignItems={'center'} gap={'32px'} w={'fit-content'}>
             <Box pos={'relative'}>
               <Box
