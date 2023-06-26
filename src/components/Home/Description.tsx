@@ -10,7 +10,7 @@ const Description: FC = () => (
     {TITLE_LIST.map((item: TitleListType, i: number) => (
       <>
         <Text
-          key={item.title + i}
+          key={item.title + item.color}
           color={'white'}
           bg={item.color}
           p={'2px 4px 0 4px'}
