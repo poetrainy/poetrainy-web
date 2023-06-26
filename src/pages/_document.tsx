@@ -1,8 +1,6 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
 
-import HeadOgp from '@/components/HeadOgp';
-
 export default class Document extends NextDocument {
   render() {
     return (
@@ -15,7 +13,6 @@ export default class Document extends NextDocument {
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon.png" />
           <meta name="theme-color" content="#fff" />
-          <HeadOgp />
         </Head>
         <body>
           {/* <ColorModeScript /> */}

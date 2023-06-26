@@ -2,14 +2,32 @@ import { FC } from 'react';
 
 import { NAME, SITE_TITLE_FULL, SITE_URL } from '@/constants/common';
 
-const HeadOgp: FC = () => (
+type Props = {
+  data?: {
+    title: string;
+    url: string;
+    description: string;
+  };
+};
+
+const HeadOgp: FC<Props> = ({ data }) => (
   <>
-    <title>{SITE_TITLE_FULL}</title>
-    <meta property={'og:title'} content={SITE_TITLE_FULL} />
-    <meta property={'og:url'} content={SITE_URL} />
+    <title>{`${data ? `${data.title}｜` : ''}${SITE_TITLE_FULL}`}</title>
+    <meta
+      property={'og:title'}
+      content={`${data ? `${data.title}｜` : ''}${SITE_TITLE_FULL}`}
+    />
+    <meta
+      property={'og:url'}
+      content={`${SITE_URL}${data ? `/${data.url}` : ''}`}
+    />
     <meta
       property={'og:description'}
-      content={'写真を撮ることが好きな新米Webエンジニアです。'}
+      content={`${
+        data
+          ? data.description
+          : '写真を撮ることが好きな新米Webエンジニアです。'
+      }`}
     />
     {/* ページの種類 */}
     <meta property={'og:type'} content={'website'} />
