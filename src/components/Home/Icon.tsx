@@ -48,6 +48,7 @@ const Icon: FC<Props> = ({ isClick, onClick }) => {
       pos={'relative'}
       onClick={() => onClick()}
       _hover={{
+        cursor: 'pointer',
         '&::after': {
           opacity: 1,
         },
