@@ -16,7 +16,7 @@ export const LINKS: LinksType = {
       },
       {
         title: 'zenn',
-        path: 'https://zenn.dev/1023_310/',
+        path: 'https://zenn.dev/poetrainy',
         icon: 'icon-link-zenn.svg',
       },
     ],
