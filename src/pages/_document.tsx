@@ -11,7 +11,7 @@ export default class Document extends NextDocument {
             rel="stylesheet"
           />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icon.png" />
+          <link rel="apple-touch-icon" href="img/icon-512x512.png" />
           <meta name="theme-color" content="#fff" />
         </Head>
         <body>
