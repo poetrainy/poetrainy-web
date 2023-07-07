@@ -360,34 +360,6 @@ const Archive: NextPage<Props> = ({
               opacity: 1,
               pointerEvents: 'auto',
             }),
-            // '&::before': {
-            //   content: '""',
-            //   display: 'block',
-            //   w: '150vw',
-            //   h: '150vh',
-            //   bg: '#0000008c',
-            //   pos: 'absolute',
-            //   zIndex: -1,
-            //   pointerEvents: 'none',
-            //   ...(isSM
-            //     ? {
-            //         inset: '-13vh auto auto -4vw',
-            //       }
-            //     : {
-            //         inset: '-20vh auto auto -30vw',
-            //       }),
-            // },
-            // '&::after': {
-            //   content: '""',
-            //   display: 'block',
-            //   w: '100%',
-            //   h: '100%',
-            //   bg: 'white',
-            //   pos: 'absolute',
-            //   inset: 0,
-            //   zIndex: -1,
-            //   pointerEvents: 'none',
-            // },
           }}
         >
           <Box
@@ -482,6 +454,7 @@ const Archive: NextPage<Props> = ({
             inset={'calc(5vw + 8px) 5vw auto auto'}
             opacity={1}
             transition={'opacity 0.2s'}
+            zIndex={1}
             _hover={{
               opacity: 0.6,
             }}
