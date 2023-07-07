@@ -3,16 +3,21 @@ import { extendTheme } from '@chakra-ui/react';
 const colors = {
   white: '#FFFFFF',
   green: '#086776',
-  black: '#383838',
-  lightGray: '#F6F6F6',
+  black800: '#383838',
+  black600: '#8e8e8e',
+  black300: '#dedede',
+  black100: '#F6F6F6',
 };
 const styles = {
   global: {
+    '*': {
+      boxSizing: 'border-box',
+    },
     html: {
       fontSize: '62.5%',
     },
     body: {
-      color: 'black',
+      color: 'black800',
       fontSize: '1.3rem',
       fontFamily: 'body',
       a: {
@@ -40,17 +45,36 @@ const fonts = {
   sp: "'League Spartan', sans-serif",
 };
 const breakpoints = {
-  sm: '500px',
-  md: '640px',
-  lg: '820px',
+  sm: '480px',
+  md: '800px',
+  lg: '1200px',
 };
 const textStyles = {
-  bodyWidth: {
-    width: {
-      base: '90vw',
-      sm: '80vw',
-    },
-    mx: 'auto',
+  transition: {
+    opacity: 0,
+    transform: 'translateY(-10px)',
+    transition: 'opacity 0.3s, transform 0.3s',
+  },
+  transitionDesign: {
+    opacity: 0,
+    transform: 'scale(95%)',
+    transition: 'opacity 0.3s, transform 0.3s',
+  },
+  imageCover: {
+    w: '100%',
+    h: '100%',
+    objectFit: 'cover',
+  },
+  imageContain: {
+    w: '100%',
+    h: '100%',
+    objectFit: 'contain',
+  },
+  zIndexHeader: {
+    zIndex: 10,
+  },
+  zIndexModal: {
+    zIndex: 15,
   },
 };
 
