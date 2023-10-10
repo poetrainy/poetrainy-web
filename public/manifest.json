@@ -1,7 +1,7 @@
 {
   "name": "poetrainy",
   "short_name": "poetrainy",
-  "description": "写真を撮ることが好きな新米Webエンジニアです。",
+  "description": "写真と観劇が好きな新米Webエンジニアです。",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",

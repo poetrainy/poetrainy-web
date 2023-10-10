@@ -26,7 +26,7 @@ const HeadOgp: FC<Props> = ({ data }) => (
       content={`${
         data
           ? data.description
-          : '写真を撮ることが好きな新米Webエンジニアです。'
+          : '写真と観劇が好きな新米Webエンジニアです。'
       }`}
     />
     {/* ページの種類 */}

@@ -29,11 +29,11 @@ export const LINKS: LinksType = {
         path: 'https://www.philosophia000.xyz/2022',
         icon: 'icon-link-philosophia.svg',
       },
-      {
-        title: 'instagram',
-        path: 'https://www.instagram.com/p0.xyz/',
-        icon: 'icon-link-instagram.svg',
-      },
+      // {
+      //   title: 'instagram',
+      //   path: 'https://www.instagram.com/p0.xyz/',
+      //   icon: 'icon-link-instagram.svg',
+      // },
     ],
   },
 };
