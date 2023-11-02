@@ -307,11 +307,11 @@ const Archive: NextPage<Props> = ({
         VtuberのGrid
       */}
         <Vtuber data={microCMSVtuberData} />
-        <OriginalSpacer size={'15vh'} />
+        <OriginalSpacer size={'10vh'} />
         {/* 
         Contact
       */}
-        <>
+        {/* <>
           <Text
             w={'fit-content'}
             m={{ base: '0 auto 16px', md: '0 auto 24px' }}
@@ -325,11 +325,11 @@ const Archive: NextPage<Props> = ({
               isLarge
             />
           </Box>
-        </>
+        </> */}
         {/* 
         Copyright
       */}
-        <OriginalSpacer size={'15vh'} />
+        {/* <OriginalSpacer size={'15vh'} /> */}
         <Copyright />
         <OriginalSpacer size={isSM ? '56px' : '120px'} />
         {/* 
