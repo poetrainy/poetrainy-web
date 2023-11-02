@@ -164,9 +164,7 @@ const Archive: NextPage<Props> = ({
               />
               <Box
                 as={'img'}
-                src={
-                  isSM ? `${item.image.url}?w=800` : `${item.image.url}?w=1000`
-                }
+                src={`${item.image.url}?w=${isSM ? 400 : 1000}`}
                 alt={item.alt}
                 textStyle={'imageCover'}
               />
