@@ -307,7 +307,7 @@ const Archive: NextPage<Props> = ({
         VtuberのGrid
       */}
         <Vtuber data={microCMSVtuberData} />
-        <OriginalSpacer size={'10vh'} />
+        <OriginalSpacer size={'9vh'} />
         {/* 
         Contact
       */}
