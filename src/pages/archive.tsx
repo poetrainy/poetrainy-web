@@ -85,10 +85,6 @@ const Archive: NextPage<Props> = ({
     window.open(url, '_blank');
   };
 
-  const contactTransition = () => {
-    router.push('/contact');
-  };
-
   return (
     <>
       <HeadOgp
@@ -308,24 +304,6 @@ const Archive: NextPage<Props> = ({
       */}
         <Vtuber data={microCMSVtuberData} />
         <OriginalSpacer size={'9vh'} />
-        {/* 
-        Contact
-      */}
-        {/* <>
-          <Text
-            w={'fit-content'}
-            m={{ base: '0 auto 16px', md: '0 auto 24px' }}
-          >
-            お問い合わせいただけると幸いです！
-          </Text>
-          <Box w={'80%'} m={'auto'}>
-            <Button
-              text={'Contact to me'}
-              onClick={contactTransition}
-              isLarge
-            />
-          </Box>
-        </> */}
         {/* 
         Copyright
       */}
