@@ -25,8 +25,8 @@ export const LINKS: LinksType = {
     color: COLOR_BLACK,
     contents: [
       {
-        title: 'portforio',
-        path: 'https://www.philosophia000.xyz/2022',
+        title: 'portfolio',
+        path: 'https://philosophia000.vercel.app/',
         icon: 'icon-link-philosophia.svg',
       },
       // {
