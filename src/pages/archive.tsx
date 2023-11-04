@@ -96,9 +96,6 @@ const Archive: NextPage<Props> = ({
       />
       <Box as={'main'}>
         <Header />
-        {/* 
-        DesignのGrid
-      */}
         <Grid
           as={'ul'}
           templateAreas={{
@@ -167,9 +164,6 @@ const Archive: NextPage<Props> = ({
             </GridItem>
           ))}
         </Grid>
-        {/* 
-        Webのモックアップ
-      */}
         <Box
           w={'100vw'}
           minH={{ base: '100vh', md: '90vh' }}
@@ -299,20 +293,10 @@ const Archive: NextPage<Props> = ({
           </Center>
         ))}
       </Center> */}
-        {/* 
-        VtuberのGrid
-      */}
         <Vtuber data={microCMSVtuberData} />
         <OriginalSpacer size={'9vh'} />
-        {/* 
-        Copyright
-      */}
-        {/* <OriginalSpacer size={'15vh'} /> */}
         <Copyright />
         <OriginalSpacer size={isSM ? '56px' : '120px'} />
-        {/* 
-        Modal
-      */}
         <Flex
           flexDir={'column'}
           justifyContent={'center'}
