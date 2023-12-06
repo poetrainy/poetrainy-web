@@ -29,11 +29,6 @@ export const LINKS: LinksType = {
         path: 'https://philosophia000.vercel.app/',
         icon: 'icon-link-philosophia.svg',
       },
-      // {
-      //   title: 'instagram',
-      //   path: 'https://www.instagram.com/p0.xyz/',
-      //   icon: 'icon-link-instagram.svg',
-      // },
     ],
   },
 };
