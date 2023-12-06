@@ -8,6 +8,7 @@ const colors = {
   black300: '#dedede',
   black100: '#F6F6F6',
 };
+
 const styles = {
   global: {
     '*': {
@@ -39,16 +40,19 @@ const styles = {
     },
   },
 };
+
 const fonts = {
   body: "'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif",
   heading: "'Abril Fatface', serif",
   sp: "'League Spartan', sans-serif",
 };
+
 const breakpoints = {
   sm: '480px',
   md: '800px',
   lg: '1200px',
 };
+
 const textStyles = {
   transition: {
     opacity: 0,
